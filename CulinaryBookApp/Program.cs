@@ -1,8 +1,7 @@
 ﻿using System;
 using CulinaryBookApp;
+using CulinaryBookApp.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,14 +10,20 @@ namespace CulinaryBookApp
     class Program
     {
         static void Main(string[] args)
-            => CreateHostBuilder(args).Build().Run();
+        {
+            //CreateHostBuilder(args).Build().Run();
+            IDateService<Author> authorService = new DataAccessService<Author>(new CulinaryBookContextFactory());
+            Console.WriteLine(authorService.Get(1).Result.NAME);
+            Console.ReadLine();
+        }
+            /*=> CreateHostBuilder(args).Build().Run();*/
             
-        public static IHostBuilder CreateHostBuilder(string[] args)
+        /*public static IHostBuilder CreateHostBuilder(string[] args)
             => Host.CreateDefaultBuilder(args).ConfigureServices(
                 (context, services) =>
                 {
                     new Startup(context).ConfigureServices(services);
-                });
+                });*/
 
     }
 }
@@ -30,21 +35,6 @@ public class Startup
     public Startup(HostBuilderContext context)
     {
         _context = context;
-        /*using (var scope = _context..Services.CreateScope())
-        {
-            var db = scope.ServiceProvider.GetRequiredService<CulinaryBookContext>();
-            db.Database.EnsureCreated();
-            db.Author.Add(
-                new AuthorEntity()
-                {
-                    NAME = "Jaś Fasola",
-                    LOGIN = "fasola",
-                    PASSWORD = "B4@n$!",
-                    TYPE = "user",
-                    DESCRIPTION = "beans beans",
-                    EMAIL = "jas@fasola.com"
-                });
-        }*/
     }
     public void ConfigureServices(IServiceCollection services)
         => services.AddDbContextFactory<CulinaryBookContext>(

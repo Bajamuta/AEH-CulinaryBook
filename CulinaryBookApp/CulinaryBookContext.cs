@@ -7,11 +7,7 @@ namespace CulinaryBookApp
         public CulinaryBookContext(DbContextOptions<CulinaryBookContext> options) : base(options)
         {
         }
-        
-        protected CulinaryBookContext()
-        {}
-        
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.HasDefaultSchema("dbo");
             /*modelBuilder.Entity<Author>().HasData(
@@ -19,9 +15,9 @@ namespace CulinaryBookApp
                 {
                     
                 }
-            );*/
+            );#1#
             base.OnModelCreating(modelBuilder);
-        }
+        }*/
         
         /*public DbSet<AuthorEntity> Author { get; set; }
         public DbSet<BookEntity> Book { get; set; }
@@ -34,6 +30,6 @@ namespace CulinaryBookApp
         public DbSet<RecipesListsEntity> RecipesList { get; set; }*/
 
         /*public DbSet<Author> Author { get; set; }*/
-        public DbSet<AuthorEntity> Author { get; set; }
+        public DbSet<Author> Author { get; set; }
     }
 }

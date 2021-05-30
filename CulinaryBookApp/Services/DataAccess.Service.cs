@@ -1,7 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CulinaryBookApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CulinaryBookApp.Services
 {
@@ -32,28 +34,45 @@ namespace CulinaryBookApp.Services
         }*/
         public async Task<IEnumerable> GetAll()
         {
-            throw new System.NotImplementedException();
+            using (CulinaryBookContext context = _contextFactory.CreateDbContext())
+            {
+                IEnumerable<T> entityList = await context.Set<T>().ToListAsync();
+                // TODO add error handling
+                return entityList;
+            }
         }
 
         public async Task<T> Get(int id)
         {
-            throw new System.NotImplementedException();
+            using (CulinaryBookContext context = _contextFactory.CreateDbContext())
+            {
+                T entity = await context.Set<T>().FirstOrDefaultAsync((e) => e.ID == id);
+                // TODO add error handling
+                return entity;
+            }
         }
 
         public async Task<T> Create(T entity)
         {
             using (CulinaryBookContext context = _contextFactory.CreateDbContext())
             {
-                var createdEntity = await context.Set<T>().AddAsync(entity);
+                EntityEntry<T> createdResult = await context.Set<T>().AddAsync(entity);
                 // TODO add error handling
                 await context.SaveChangesAsync();
-                return createdEntity.Entity;
+                return createdResult.Entity;
             }
         }
 
         public async Task<T> Update(int id, T entity)
         {
-            throw new System.NotImplementedException();
+            using (CulinaryBookContext context = _contextFactory.CreateDbContext())
+            {
+                entity.ID = id;
+                // TODO add error handling
+                context.Set<T>().Update(entity);
+                await context.SaveChangesAsync();
+                return entity;
+            }
         }
 
         public async Task<bool> Delete(int id)

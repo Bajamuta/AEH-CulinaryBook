@@ -5,7 +5,7 @@ using CulinaryBookApp.Models;
 namespace CulinaryBookApp
 {
     [Table("AUTHOR")]
-    public class AuthorEntity : DbObject
+    public class Author : DbObject
     {
         /*[Key]
         public int ID { get; set; }*/
