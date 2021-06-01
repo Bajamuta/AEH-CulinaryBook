@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CulinaryBookApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CulinaryBookApp
 {
@@ -7,29 +8,29 @@ namespace CulinaryBookApp
         public CulinaryBookContext(DbContextOptions<CulinaryBookContext> options) : base(options)
         {
         }
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.HasDefaultSchema("dbo");
-            /*modelBuilder.Entity<Author>().HasData(
-                new Author[]
-                {
-                    
-                }
-            );#1#
-            base.OnModelCreating(modelBuilder);
-        }*/
-        
-        /*public DbSet<AuthorEntity> Author { get; set; }
-        public DbSet<BookEntity> Book { get; set; }
-        public DbSet<CategoryEntity> Category { get; set; }
-        public DbSet<IngredientEntity> Ingredient { get; set; }
-        public DbSet<StepEntity> Step { get; set; }
-        public DbSet<RecipeEntity> Recipe { get; set; }
-        public DbSet<StepsListEntity> StepsList { get; set; }
-        public DbSet<IngredientsListEntity> IngredientsList { get; set; }
-        public DbSet<RecipesListsEntity> RecipesList { get; set; }*/
+            modelBuilder.Entity<Recipe>()
+                .HasOne<Author>(recipe => recipe.Author)
+                .WithOne(author => author.Recipe)
+                .HasForeignKey<Recipe>(recipe => recipe.Id_Author);
 
-        /*public DbSet<Author> Author { get; set; }*/
-        public DbSet<Author> Author { get; set; }
+            modelBuilder.Entity<IngredientsList>()
+                .HasKey(ingr => new {ingr.Id_Recipe, ingr.Id_Ingredient});
+            modelBuilder.Entity<IngredientsList>()
+                .HasOne<Recipe>(list => list.Recipe)
+                .WithMany(recipe => recipe.IngredientsLists)
+                .HasForeignKey(ingr => ingr.Id_Recipe);
+            modelBuilder.Entity<IngredientsList>()
+                .HasOne<Ingredient>(list => list.Ingredient)
+                .WithMany(ingredient => ingredient.IngredientsLists)
+                .HasForeignKey(list => list.Id_Ingredient);
+            base.OnModelCreating(modelBuilder);
+        }
+        
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
