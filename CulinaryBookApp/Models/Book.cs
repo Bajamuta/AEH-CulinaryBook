@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CulinaryBookApp.Models
@@ -8,6 +9,8 @@ namespace CulinaryBookApp.Models
     {
         [Required]
         [MaxLength(50, ErrorMessage = "Name cannot exceed 50 characters")]
-        public string NAME { get; set; }
+        public string Name { get; set; }
+        
+        public IList<RecipesList> RecipesLists { get; set; }
     }
 }

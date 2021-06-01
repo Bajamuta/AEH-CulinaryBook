@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CulinaryBookApp.Models
@@ -7,6 +8,8 @@ namespace CulinaryBookApp.Models
     public class Step : DbObject
     {
         [Required]
-        public string DESCRIPTION { get; set; }
+        public string Description { get; set; }
+        
+        public IList<StepsList> StepsLists { get; set; }
     }
 }

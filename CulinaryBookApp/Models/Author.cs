@@ -10,7 +10,7 @@ namespace CulinaryBookApp
        // We do not need the id parameter because we use DbObject
         // TODO add enum types
         [Required]
-        public string TYPE { get; set; }
+        public string Type { get; set; }
         
         [Required]
         [MaxLength(50, ErrorMessage = "Name cannot exceed 50 characters")]

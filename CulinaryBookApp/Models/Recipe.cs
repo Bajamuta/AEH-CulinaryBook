@@ -19,5 +19,7 @@ namespace CulinaryBookApp.Models
         public Author Author { get; set; }
         
         public IList<IngredientsList> IngredientsLists { get; set; }
+        public IList<RecipesList> RecipesLists { get; set; }
+        public IList<StepsList> StepsLists { get; set; }
     }
 }
