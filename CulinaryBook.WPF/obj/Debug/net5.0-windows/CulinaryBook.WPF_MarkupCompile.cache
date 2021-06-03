@@ -1,0 +1,20 @@
+﻿CulinaryBook.WPF
+
+
+winexe
+C#
+.cs
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\
+CulinaryBook.WPF
+none
+false
+TRACE;DEBUG;NET;NET5_0;NETCOREAPP
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\App.xaml
+11166974613
+
+27821126486
+193-1891726104
+Controls\NavigationBar.xaml;MainWindow.xaml;Styles\Common.xaml;Views\AuthorsView.xaml;Views\BooksView.xaml;Views\CategoriesView.xaml;Views\HomeView.xaml;Views\IngredientsView.xaml;Views\LoginView.xaml;Views\LogoutView.xaml;Views\RecipesView.xaml;
+
+False
+
