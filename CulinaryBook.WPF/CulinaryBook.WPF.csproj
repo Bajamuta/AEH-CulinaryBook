@@ -6,4 +6,8 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CulinaryBook.ConsoleApp\CulinaryBook.ConsoleApp.csproj" />
+    </ItemGroup>
+
 </Project>
