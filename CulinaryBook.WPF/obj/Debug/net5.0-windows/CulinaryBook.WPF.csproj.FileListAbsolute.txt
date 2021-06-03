@@ -23,3 +23,9 @@ D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\Culina
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Controls\NavigationBar.g.cs
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Controls\NavigationBar.baml
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Styles\Common.baml
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\App.baml
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Controls\Center.g.cs
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Controls\Footer.g.cs
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Controls\Center.baml
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Controls\Footer.baml
