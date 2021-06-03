@@ -7,10 +7,11 @@ namespace CulinaryBookApp
     {
         public CulinaryBookContext(DbContextOptions<CulinaryBookContext> options) : base(options)
         {
+            //Database.Migrate();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Recipe>()
+            /*modelBuilder.Entity<Recipe>()
                 .HasOne<Author>(recipe => recipe.Author)
                 .WithOne(author => author.Recipe)
                 .HasForeignKey<Recipe>(recipe => recipe.Id_Author);
@@ -50,7 +51,7 @@ namespace CulinaryBookApp
             modelBuilder.Entity<RecipesList>()
                 .HasOne<Book>(list => list.Book)
                 .WithMany(book => book.RecipesLists)
-                .HasForeignKey(list => list.Id_Book);
+                .HasForeignKey(list => list.Id_Book);*/
             base.OnModelCreating(modelBuilder);
         }
         

@@ -36,7 +36,7 @@ namespace CulinaryBookApp
                         Email = "jagoda@malinka.pl", 
                         Description = "Malinka jagody truskawki"
                     });*/
-            bookService.Create(
+            /*bookService.Create(
                 new Book
                 {
                     Name = "Japanese Cuisine"
@@ -69,10 +69,36 @@ namespace CulinaryBookApp
                 {
                     Description = "chop vegetables"
                 }
-            );
-            Console.WriteLine(ingredientsService.Get(1).Result.Id_Ingredient);
+            );*/
+            /*Recipe rec1 = recipeService.Get(2).Result;
+            Ingredient ingr1 = ingredientService.Get(3).Result;
+            ingredientsService.Create(
+                new IngredientsList
+                {
+                    Id_Recipe = rec1.ID,
+                    Id_Ingredient = ingr1.ID,
+                    Quantity = 50
+                }
+            ).Wait();*/
+            /*recipesService.Create(
+                new RecipesList
+                {
+                    Id_Book = 3,
+                    Id_Recipe = 1,
+                    Id_Category = 3
+                }
+            ).Wait();*/
+            /*stepsService.Create(
+                new StepsList
+                {
+                    Id_Recipe = 1,
+                    Id_Step = 3,
+                    Step_Number = 2
+                }
+            ).Wait();*/
+            /*Console.WriteLine(ingredientsService.Get(1).Result.Id_Ingredient);
             Console.WriteLine(recipesService.Get(2).Result.Id_Book);
-            Console.WriteLine(stepsService.Get(1).Result.Step_Number);
+            Console.WriteLine(stepsService.Get(1).Result.Step_Number);*/
             //Console.ReadLine();
         }
             /*=> CreateHostBuilder(args).Build().Run();*/

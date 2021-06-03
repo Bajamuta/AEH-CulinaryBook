@@ -3,14 +3,16 @@ using CulinaryBookApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CulinaryBookApp.Migrations
 {
     [DbContext(typeof(CulinaryBookContext))]
-    partial class CulinaryBookContextModelSnapshot : ModelSnapshot
+    [Migration("20210602191632_migrate-02-06-2021")]
+    partial class migrate02062021
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

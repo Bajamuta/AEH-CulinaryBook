@@ -7,6 +7,11 @@ namespace CulinaryBookApp.Models
     [Table("INGREDIENT")]
     public class Ingredient : DbObject
     {
+        public Ingredient()
+        {
+            IngredientsLists = new List<IngredientsList>();
+        }
+        
         [Required]
         [MaxLength(50, ErrorMessage = "Name cannot exceed 50 characters")]
         public string Name { get; set; }

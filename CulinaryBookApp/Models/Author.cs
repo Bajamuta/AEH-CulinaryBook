@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CulinaryBookApp.Models;
 
@@ -31,6 +32,6 @@ namespace CulinaryBookApp
             ErrorMessage = "Invalid e-mail format")]
         public string Email { get; set; }
 
-        public Recipe Recipe { get; set; }
+        public IList<Recipe> Recipes { get; set; }
     }
 }

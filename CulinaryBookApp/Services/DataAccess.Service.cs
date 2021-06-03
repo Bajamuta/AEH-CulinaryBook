@@ -16,22 +16,6 @@ namespace CulinaryBookApp.Services
         {
             _contextFactory = contextFactory;
         }
-
-        /*public void TestDB()
-        {
-            using (var context = _contextFactory.CreateDbContext())
-            {
-                context.Author.Add(new AuthorEntity()
-                {
-                    NAME = "Jaś Fasola",
-                    LOGIN = "fasola",
-                    PASSWORD = "B4@n$!",
-                    TYPE = "user",
-                    DESCRIPTION = "beans beans",
-                    EMAIL = "jas@fasola.com"
-                });
-            }
-        }*/
         public async Task<IEnumerable> GetAll()
         {
             using (CulinaryBookContext context = _contextFactory.CreateDbContext())

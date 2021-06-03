@@ -7,15 +7,18 @@ namespace CulinaryBookApp.Models
     [Table("RECIPE")]
     public class Recipe : DbObject
     {
+        public Recipe()
+        {
+            IngredientsLists = new List<IngredientsList>();
+        }
         [Required]
         public string Name { get; set; }
         
         public string Photo { get; set; }
         
-        [ForeignKey("AUTHOR")]
+        [ForeignKey("Author")]
         [Required]
         public int Id_Author { get; set; }
-
         public Author Author { get; set; }
         
         public IList<IngredientsList> IngredientsLists { get; set; }

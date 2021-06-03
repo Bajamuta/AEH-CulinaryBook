@@ -5,15 +5,15 @@ namespace CulinaryBookApp.Models
     [Table("RECIPES_LIST")]
     public class RecipesList : DbObject
     {
-        [ForeignKey("RECIPE")]
+        [ForeignKey("Recipe")]
         public int Id_Recipe { get; set; }
         public Recipe Recipe { get; set; }
         
-        [ForeignKey("CATEGORY")]
+        [ForeignKey("Category")]
         public int Id_Category { get; set; }
         public Category Category { get; set; }
         
-        [ForeignKey("BOOK")]
+        [ForeignKey("Book")]
         public int Id_Book { get; set; }
         public Book Book { get; set; }
     }
