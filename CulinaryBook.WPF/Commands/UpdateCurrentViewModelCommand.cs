@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Windows.Input;
 using CulinaryBook.WPF.State.Navigators;
 using CulinaryBook.WPF.ViewModels;
@@ -15,12 +16,12 @@ namespace CulinaryBook.WPF.Commands
             _navigator = navigator;
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             if (parameter is ViewType)
             {

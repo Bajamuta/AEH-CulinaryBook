@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CulinaryBook.WPF.Controls"
+             xmlns:nav="clr-namespace:CulinaryBook.WPF.State.Navigators"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -23,13 +24,20 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0" Content="HOME" />
-            <RadioButton Grid.Column="1" Content="BOOKS" />
-            <RadioButton Grid.Column="2" Content="CATEGORIES" />
-            <RadioButton Grid.Column="3" Content="RECIPES" />
-            <RadioButton Grid.Column="4" Content="INGREDIENTS" />
-            <RadioButton Grid.Column="5" Content="AUTHORS" />
-            <RadioButton Grid.Column="6" Content="LOGIN" />
+            <RadioButton Grid.Column="0" Content="HOME" Command="{Binding UpdateCurrentViewModelCommand}"
+                         CommandParameter="{x:Static nav:ViewType.Home}"/>
+            <RadioButton Grid.Column="1" Content="BOOKS" Command="{Binding UpdateCurrentViewModelCommand}"
+                         CommandParameter="{x:Static nav:ViewType.Books}" />
+            <RadioButton Grid.Column="2" Content="CATEGORIES" Command="{Binding UpdateCurrentViewModelCommand}"
+                         CommandParameter="{x:Static nav:ViewType.Categories}" />
+            <RadioButton Grid.Column="3" Content="RECIPES" Command="{Binding UpdateCurrentViewModelCommand}"
+                         CommandParameter="{x:Static nav:ViewType.Recipes}" />
+            <RadioButton Grid.Column="4" Content="INGREDIENTS" Command="{Binding UpdateCurrentViewModelCommand}"
+                         CommandParameter="{x:Static nav:ViewType.Ingredients}" />
+            <RadioButton Grid.Column="5" Content="AUTHORS" Command="{Binding UpdateCurrentViewModelCommand}"
+                         CommandParameter="{x:Static nav:ViewType.Authors}" />
+            <RadioButton Grid.Column="6" Content="LOGIN" Command="{Binding UpdateCurrentViewModelCommand}"
+                         CommandParameter="{x:Static nav:ViewType.Login}" />
         </Grid>
     </Grid>
 </UserControl>
