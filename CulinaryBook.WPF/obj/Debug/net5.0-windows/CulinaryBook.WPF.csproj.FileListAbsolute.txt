@@ -20,3 +20,6 @@ D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\Culina
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\ref\CulinaryBook.WPF.dll
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\CulinaryBook.WPF.pdb
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\CulinaryBook.WPF.genruntimeconfig.cache
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Controls\NavigationBar.g.cs
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Controls\NavigationBar.baml

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\App.xaml
-11407045341
+2-1829013610
 
-3-1233169557
+6-294450772
 193-1891726104
-MainWindow.xaml;
+Controls\NavigationBar.xaml;MainWindow.xaml;
 
 False
 
