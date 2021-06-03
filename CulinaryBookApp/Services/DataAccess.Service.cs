@@ -41,7 +41,7 @@ namespace CulinaryBookApp.Services
             using (CulinaryBookContext context = _contextFactory.CreateDbContext())
             {
                 EntityEntry<T> createdResult = await context.Set<T>().AddAsync(entity);
-                // TODO add error handling
+                // TODO add error handling e.x. required fields
                 await context.SaveChangesAsync();
                 return createdResult.Entity;
             }
@@ -65,7 +65,7 @@ namespace CulinaryBookApp.Services
             {
                 T entity = await context.Set<T>().FirstOrDefaultAsync((e) => e.ID == id);
                 context.Set<T>().Remove(entity);
-                // TODO add error handling
+                // TODO add error handling e.x. element is used as foreign key
                 await context.SaveChangesAsync();
                 return true;
             }

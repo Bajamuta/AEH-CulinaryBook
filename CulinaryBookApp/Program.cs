@@ -115,6 +115,9 @@ namespace CulinaryBookApp
                     Id_Recipe = 3
                 }
             ).Wait();*/
+            /*recipesService.Delete(10).Wait();*/
+            /*stepsService.Delete(8).Wait();*/
+            /*authorService.Delete(1007).Wait();*/
         }
             /*=> CreateHostBuilder(args).Build().Run();*/
             
