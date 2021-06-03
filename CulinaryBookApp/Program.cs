@@ -25,7 +25,7 @@ namespace CulinaryBookApp
             IDateService<RecipesList> recipesService =
                 new DataAccessService<RecipesList>(new CulinaryBookContextFactory());
             IDateService<StepsList> stepsService = new DataAccessService<StepsList>(new CulinaryBookContextFactory());
-            Console.WriteLine(authorService.Get(1).Result.Name);
+            /*Console.WriteLine(authorService.Get(1).Result.Name);*/
             /*authorService.Create(
                 new Author
                     {
@@ -99,7 +99,22 @@ namespace CulinaryBookApp
             /*Console.WriteLine(ingredientsService.Get(1).Result.Id_Ingredient);
             Console.WriteLine(recipesService.Get(2).Result.Id_Book);
             Console.WriteLine(stepsService.Get(1).Result.Step_Number);*/
-            //Console.ReadLine();
+            /*stepsService.Update(1010,
+                new StepsList
+                {
+                    Id_Recipe = 4,
+                    Id_Step = 3,
+                    Step_Number = 1
+                }
+            ).Wait();*/
+            /*recipesService.Update(1012,
+                new RecipesList
+                {
+                    Id_Book = 3,
+                    Id_Category = 3,
+                    Id_Recipe = 3
+                }
+            ).Wait();*/
         }
             /*=> CreateHostBuilder(args).Build().Run();*/
             
