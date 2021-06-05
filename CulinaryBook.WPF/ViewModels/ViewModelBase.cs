@@ -1,6 +1,8 @@
-﻿namespace CulinaryBook.WPF.ViewModels
+﻿using CulinaryBook.WPF.Models;
+
+namespace CulinaryBook.WPF.ViewModels
 {
-    public class ViewModelBase
+    public class ViewModelBase : ObservableObject
     {
         
     }

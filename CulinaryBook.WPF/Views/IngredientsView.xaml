@@ -6,7 +6,16 @@
              xmlns:local="clr-namespace:CulinaryBook.WPF.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Text="Ingredients page"></TextBlock>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Ingredients page" />
+        <WrapPanel Grid.Row="1" VerticalAlignment="Center" Margin="0 20 0 0">
+            <TextBox Width="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Margin="20 0 0 0" Content="Search" Command="{Binding SearchIngredientCommand}"/>
+        </WrapPanel>
     </Grid>
 </UserControl>

@@ -10,7 +10,7 @@ namespace CulinaryBook.WPF.Commands
     public class UpdateCurrentViewModelCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
-        private INavigator _navigator;
+        private readonly INavigator _navigator;
         private readonly IViewModelAbstractFactory _viewModelAbstractFactory;
 
         public UpdateCurrentViewModelCommand(

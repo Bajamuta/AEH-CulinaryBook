@@ -10,6 +10,7 @@ using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using CulinaryBook.ConsoleApp.Services.BasicServices;
 using CulinaryBook.ConsoleApp.Services.DataAccess;
+using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.WPF.State.Navigators;
 using CulinaryBook.WPF.ViewModels;
 using CulinaryBook.WPF.ViewModels.Factories;
@@ -27,8 +28,7 @@ namespace CulinaryBook.WPF
             // TODO Api: photos from internet
             IServiceProvider serviceProvider = CreateServiceProvider();
             IAuthorDataService authorService = serviceProvider.GetRequiredService<IAuthorDataService>();
-            Window window = new MainWindow();
-            window.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
+            Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
 
             base.OnStartup(e);
@@ -39,6 +39,7 @@ namespace CulinaryBook.WPF
             IServiceCollection services = new ServiceCollection();
             services.AddSingleton<CulinaryBookContextFactory>();
             services.AddSingleton<IAuthorDataService, AuthorDataService>();
+            services.AddSingleton<IIngredientDataService, IngredientDataService>();
 
             services.AddSingleton<IViewModelAbstractFactory, ViewModelAbstractFactory>();
             services.AddSingleton<IViewModelFactory<HomeViewModel>, HomeViewFactory>();
@@ -52,6 +53,8 @@ namespace CulinaryBook.WPF
             
             services.AddScoped<INavigator, Navigator>();
             services.AddScoped<MainViewModel>();
+
+            services.AddScoped<MainWindow>( s => new MainWindow(s.GetRequiredService<MainViewModel>()));
 
             return services.BuildServiceProvider();
         }
