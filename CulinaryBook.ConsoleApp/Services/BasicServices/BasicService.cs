@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp.Models;
+using CulinaryBook.ConsoleApp.Services.DataAccess;
 
 namespace CulinaryBook.ConsoleApp.Services.BasicServices
 {
     public class BasicService<T> : IBasicService<T> where T : DbObject
     {
-        private readonly IDateService<T> _service;
+        private readonly IDataService<T> _service;
 
         public BasicService()
         {

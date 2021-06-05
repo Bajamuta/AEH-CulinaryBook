@@ -5,9 +5,15 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using CulinaryBook.ConsoleApp;
 using CulinaryBook.ConsoleApp.Models;
+using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using CulinaryBook.ConsoleApp.Services.BasicServices;
+using CulinaryBook.ConsoleApp.Services.DataAccess;
+using CulinaryBook.WPF.State.Navigators;
 using CulinaryBook.WPF.ViewModels;
+using CulinaryBook.WPF.ViewModels.Factories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CulinaryBook.WPF
 {
@@ -18,15 +24,36 @@ namespace CulinaryBook.WPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            BasicService<Recipe> recipeService = new BasicService<Recipe>();
-            Recipe recipe = new Recipe()
-            {
-
-            };
+            // TODO Api: photos from internet
+            IServiceProvider serviceProvider = CreateServiceProvider();
+            IAuthorDataService authorService = serviceProvider.GetRequiredService<IAuthorDataService>();
             Window window = new MainWindow();
-            window.DataContext = new MainViewModel();
+            window.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
             window.Show();
+
             base.OnStartup(e);
+        }
+
+        private IServiceProvider CreateServiceProvider()
+        {
+            IServiceCollection services = new ServiceCollection();
+            services.AddSingleton<CulinaryBookContextFactory>();
+            services.AddSingleton<IAuthorDataService, AuthorDataService>();
+
+            services.AddSingleton<IViewModelAbstractFactory, ViewModelAbstractFactory>();
+            services.AddSingleton<IViewModelFactory<HomeViewModel>, HomeViewFactory>();
+            services.AddSingleton<IViewModelFactory<AuthorsViewModel>, AuthorsViewFactory>();
+            services.AddSingleton<IViewModelFactory<BooksViewModel>, BooksViewFactory>();
+            services.AddSingleton<IViewModelFactory<CategoriesViewModel>, CategoriesViewFactory>();
+            services.AddSingleton<IViewModelFactory<IngredientsViewModel>, IngredientsViewFactory>();
+            services.AddSingleton<IViewModelFactory<RecipesViewModel>, RecipesViewFactory>();
+            services.AddSingleton<IViewModelFactory<LoginViewModel>, LoginViewFactory>();
+            services.AddSingleton<IViewModelFactory<LogoutViewModel>, LogoutViewFactory>();
+            
+            services.AddScoped<INavigator, Navigator>();
+            services.AddScoped<MainViewModel>();
+
+            return services.BuildServiceProvider();
         }
     }
 }
