@@ -1,5 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
 using CulinaryBook.ConsoleApp.Models;
+using CulinaryBook.ConsoleApp.Services.IngredientServices;
+using CulinaryBook.WPF.Commands;
 using CulinaryBook.WPF.Models;
 
 namespace CulinaryBook.WPF.ViewModels
@@ -18,6 +21,7 @@ namespace CulinaryBook.WPF.ViewModels
         }
 
         private DbObjectWithName _ingredient;
+        private List<ItemList> _ingredientsList;
 
         public DbObjectWithName Ingredient
         {
@@ -29,6 +33,22 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
+        public List<ItemList> IngredientsList
+        {
+            get => _ingredientsList;
+            set
+            {
+                _ingredientsList = value;
+                OnPropertyChanged(nameof(IngredientsList));
+            }
+        }
+
         public ICommand SearchIngredientCommand { get; set; }
+
+        public IngredientsViewModel(IIngredientDataService ingredientDataService)
+        {
+            SearchIngredientCommand = new SearchIngredientCommand(this, ingredientDataService);
+            IngredientsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
+        }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
+using CulinaryBook.WPF.Models;
 using CulinaryBook.WPF.ViewModels;
 
 namespace CulinaryBook.WPF.Commands
@@ -27,10 +29,17 @@ namespace CulinaryBook.WPF.Commands
 
         public async void Execute(object? parameter)
         {
+            List<ItemList> items = new List<ItemList>();
             try
             {
                 DbObjectWithName ingredient = await _ingredientDataService.GetByName(_ingredientsViewModel.Search);
                 _ingredientsViewModel.Ingredient = ingredient;
+                items.Add(new ItemList
+                {
+                    Title = ingredient.Name,
+                    RecipeCount = "(" + 2 + ")"
+                });
+                _ingredientsViewModel.IngredientsList = items;
             }
             catch (Exception e)
             {
