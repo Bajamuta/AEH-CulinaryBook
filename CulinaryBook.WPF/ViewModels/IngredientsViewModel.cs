@@ -9,17 +9,6 @@ namespace CulinaryBook.WPF.ViewModels
 {
     public class IngredientsViewModel : ViewModelBase
     {
-        private string _search;
-        public string Search
-        {
-            get => _search;
-            set
-            {
-                _search = value;
-                OnPropertyChanged(nameof(Search));
-            }
-        }
-
         private DbObjectWithName _ingredient;
         private List<ItemList> _ingredientsList;
 
@@ -48,6 +37,7 @@ namespace CulinaryBook.WPF.ViewModels
         public IngredientsViewModel(IIngredientDataService ingredientDataService)
         {
             SearchIngredientCommand = new SearchIngredientCommand(this, ingredientDataService);
+            // TODO get all ingredients
             IngredientsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
         }
     }

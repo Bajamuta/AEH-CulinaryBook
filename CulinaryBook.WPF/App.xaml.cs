@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using CulinaryBook.ConsoleApp;
-using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.AuthorServices;
-using CulinaryBook.ConsoleApp.Services.BasicServices;
-using CulinaryBook.ConsoleApp.Services.DataAccess;
+using CulinaryBook.ConsoleApp.Services.BookServices;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.WPF.State.Navigators;
 using CulinaryBook.WPF.ViewModels;
@@ -27,7 +20,6 @@ namespace CulinaryBook.WPF
         {
             // TODO Api: photos from internet
             IServiceProvider serviceProvider = CreateServiceProvider();
-            IAuthorDataService authorService = serviceProvider.GetRequiredService<IAuthorDataService>();
             Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
 
@@ -40,6 +32,7 @@ namespace CulinaryBook.WPF
             services.AddSingleton<CulinaryBookContextFactory>();
             services.AddSingleton<IAuthorDataService, AuthorDataService>();
             services.AddSingleton<IIngredientDataService, IngredientDataService>();
+            services.AddSingleton<IBookDataService, BookDataService>();
 
             services.AddSingleton<IViewModelAbstractFactory, ViewModelAbstractFactory>();
             services.AddSingleton<IViewModelFactory<HomeViewModel>, HomeViewFactory>();
