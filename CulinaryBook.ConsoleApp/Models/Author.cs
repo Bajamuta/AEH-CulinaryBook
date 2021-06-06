@@ -6,17 +6,13 @@ using CulinaryBook.ConsoleApp.Models;
 namespace CulinaryBook.ConsoleApp
 {
     [Table("AUTHOR")]
-    public class Author : DbObject
+    public class Author : DbObjectWithName
     {
        // We do not need the id parameter because we use DbObject
         // TODO add enum types
         [Required]
         public string Type { get; set; }
-        
-        [Required]
-        [MaxLength(50, ErrorMessage = "Name cannot exceed 50 characters")]
-        public string Name { get; set; }
-        
+
         [Required]
         public string Login { get; set; }
         

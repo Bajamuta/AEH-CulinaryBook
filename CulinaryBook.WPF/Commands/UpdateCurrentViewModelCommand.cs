@@ -3,17 +3,22 @@ using System;
 using System.Windows.Input;
 using CulinaryBook.WPF.State.Navigators;
 using CulinaryBook.WPF.ViewModels;
+using CulinaryBook.WPF.ViewModels.Factories;
 
 namespace CulinaryBook.WPF.Commands
 {
     public class UpdateCurrentViewModelCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
-        private INavigator _navigator;
+        private readonly INavigator _navigator;
+        private readonly IViewModelAbstractFactory _viewModelAbstractFactory;
 
-        public UpdateCurrentViewModelCommand(INavigator navigator)
+        public UpdateCurrentViewModelCommand(
+            INavigator navigator, 
+            IViewModelAbstractFactory viewModelAbstractFactory)
         {
             _navigator = navigator;
+            _viewModelAbstractFactory = viewModelAbstractFactory;
         }
 
         public bool CanExecute(object? parameter)
@@ -26,35 +31,7 @@ namespace CulinaryBook.WPF.Commands
             if (parameter is ViewType)
             {
                 ViewType viewType = (ViewType) parameter;
-                switch (viewType)
-                {
-                    case ViewType.Home:
-                        _navigator.CurrentViewModel = new HomeViewModel();
-                        break;
-                    case ViewType.Books:
-                        _navigator.CurrentViewModel = new BooksViewModel();
-                        break;
-                    case ViewType.Categories:
-                        _navigator.CurrentViewModel = new CategoriesViewModel();
-                        break;
-                    case ViewType.Recipes:
-                        _navigator.CurrentViewModel = new RecipesViewModel();
-                        break;
-                    case ViewType.Ingredients:
-                        _navigator.CurrentViewModel = new IngredientsViewModel();
-                        break;
-                    case ViewType.Authors:
-                        _navigator.CurrentViewModel = new AuthorsViewModel();
-                        break;
-                    case ViewType.Login:
-                        _navigator.CurrentViewModel = new LoginViewModel();
-                        break;
-                    case ViewType.Logout:
-                        _navigator.CurrentViewModel = new LogoutViewModel();
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                _navigator.CurrentViewModel = _viewModelAbstractFactory.CreateViewModel(viewType);
             }
         }
     }

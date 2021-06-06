@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Threading.Tasks;
 
-namespace CulinaryBook.ConsoleApp.Services
+namespace CulinaryBook.ConsoleApp.Services.DataAccess
 {
-    public interface IDateService<T>
+    public interface IDataService<T>
     {
         Task<IEnumerable> GetAll();
         Task<T> Get(int id);

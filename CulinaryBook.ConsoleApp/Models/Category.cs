@@ -5,12 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CulinaryBook.ConsoleApp.Models
 {
     [Table("CATEGORY")]
-    public class Category : DbObject
+    public class Category : DbObjectWithName
     {
-        [Required]
-        [MaxLength(50, ErrorMessage = "Name cannot exceed 50 characters")]
-        public string Name { get; set; }
-        
         [Required]
         public string Description { get; set; }
         

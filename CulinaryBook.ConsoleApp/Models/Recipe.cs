@@ -5,15 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CulinaryBook.ConsoleApp.Models
 {
     [Table("RECIPE")]
-    public class Recipe : DbObject
+    public class Recipe : DbObjectWithName
     {
         public Recipe()
         {
             IngredientsLists = new List<IngredientsList>();
         }
-        [Required]
-        public string Name { get; set; }
-        
         public string Photo { get; set; }
         
         [ForeignKey("Author")]

@@ -5,6 +5,7 @@ using CulinaryBook.WPF.Annotations;
 using CulinaryBook.WPF.Commands;
 using CulinaryBook.WPF.Models;
 using CulinaryBook.WPF.ViewModels;
+using CulinaryBook.WPF.ViewModels.Factories;
 
 namespace CulinaryBook.WPF.State.Navigators
 {
@@ -20,6 +21,11 @@ namespace CulinaryBook.WPF.State.Navigators
                 OnPropertyChanged(nameof(CurrentViewModel));
             }
         }
-        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
+        public ICommand UpdateCurrentViewModelCommand { get; set; }
+
+        public Navigator(IViewModelAbstractFactory viewModelAbstractFactory)
+        {
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelAbstractFactory);
+        }
     }
 }
