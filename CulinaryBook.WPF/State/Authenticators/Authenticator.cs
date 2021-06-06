@@ -31,6 +31,7 @@ namespace CulinaryBook.WPF.State.Authenticators
             }
             catch (Exception e)
             {
+                // TODO error handling lost connection with database
                 success = false;
             }
             return success;

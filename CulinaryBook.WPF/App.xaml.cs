@@ -6,6 +6,7 @@ using CulinaryBook.ConsoleApp.Services.BookServices;
 using CulinaryBook.ConsoleApp.Services.CategoryServices;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
+using CulinaryBook.WPF.State.Authenticators;
 using CulinaryBook.WPF.State.Navigators;
 using CulinaryBook.WPF.ViewModels;
 using CulinaryBook.WPF.ViewModels.Factories;
@@ -55,6 +56,7 @@ namespace CulinaryBook.WPF
             services.AddSingleton<IViewModelFactory<LogoutViewModel>, LogoutViewFactory>();
             
             services.AddScoped<INavigator, Navigator>();
+            services.AddScoped<IAuthenticator, Authenticator>();
             services.AddScoped<MainViewModel>();
 
             services.AddScoped<MainWindow>( s => new MainWindow(s.GetRequiredService<MainViewModel>()));

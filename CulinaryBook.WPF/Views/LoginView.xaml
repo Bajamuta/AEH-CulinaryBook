@@ -21,11 +21,11 @@
            </StackPanel>
             <StackPanel>
                 <Label Content="Password" Width="Auto"/>
-                <PasswordBox Width="300" Margin="10 0 0 0" Password="{Binding UserPassword, UpdateSourceTrigger=PropertyChanged}"/>
+                <PasswordBox x:Name="PbPassword" Width="300" Margin="10 0 0 0"/>
             </StackPanel>
         </WrapPanel>
         <Button Grid.Row="2" Width="300" Height="Auto" Margin="0 20 0 0"
-                Content="Login" Command="{Binding LoginCommand}">
+                Content="Login" Click="LoginClick">
         </Button>
         <TextBlock Grid.Row="3" Text="{Binding LoginResult, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>

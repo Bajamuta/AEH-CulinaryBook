@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using CulinaryBook.ConsoleApp;
-using CulinaryBook.ConsoleApp.Services.LoginServices;
-using CulinaryBook.WPF.Annotations;
+using CulinaryBook.WPF.State.Authenticators;
 using CulinaryBook.WPF.ViewModels;
 
 namespace CulinaryBook.WPF.Commands
@@ -10,14 +8,13 @@ namespace CulinaryBook.WPF.Commands
     public class LoginCommand : ICommand
     {
         private readonly LoginViewModel _loginViewModel;
-        private readonly ILoginService _loginService;
+        private readonly IAuthenticator _authenticator;
         
         public LoginCommand(
-            LoginViewModel loginViewModel, 
-            ILoginService loginService)
+            LoginViewModel loginViewModel, IAuthenticator authenticator)
         {
             _loginViewModel = loginViewModel;
-            _loginService = loginService;
+            _authenticator = authenticator;
         }
         
         public bool CanExecute(object? parameter)
@@ -25,26 +22,17 @@ namespace CulinaryBook.WPF.Commands
             return true;
         }
 
-        public async void Execute([CanBeNull] object parameter)
+        public async void Execute(object parameter)
         {
-            /*try
+            bool success = await _authenticator.Login(_loginViewModel.UserLogin, parameter.ToString());
+            if (success)
             {
-                Author loggedAuthor = await _loginService.Login(userLogin, userPassword);
-                if (loggedAuthor != null)
-                {
-                    _loginViewModel.Author = loggedAuthor;
-                    _loginViewModel.LoginResult = "You have been logged, " + loggedAuthor.Name;
-                }
-                else
-                {
-                    // TODO create Exception for failed login
-                    _loginViewModel.LoginResult = "Error occured when logging";
-                }
+                _loginViewModel.LoginResult = "Zalogowany";
             }
-            catch (Exception e)
+            else
             {
-                throw new Exception();
-            }*/
+                _loginViewModel.LoginResult = "Błąd";
+            }
         }
 
         public event EventHandler? CanExecuteChanged;

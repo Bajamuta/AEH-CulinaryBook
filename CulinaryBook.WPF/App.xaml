@@ -28,7 +28,7 @@
                  <views:AuthorsView />
              </DataTemplate>
              <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                 <views:LoginView />
+                 <views:LoginView LoginCommand="{Binding LoginCommand}"/>
              </DataTemplate>
              <DataTemplate DataType="{x:Type viewmodels:LogoutViewModel}">
                  <views:LogoutView />

@@ -2,6 +2,7 @@
 using CulinaryBook.ConsoleApp;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.WPF.Commands;
+using CulinaryBook.WPF.State.Authenticators;
 
 namespace CulinaryBook.WPF.ViewModels
 {
@@ -52,11 +53,11 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
-        public ICommand LoginCommand { get; set; }
+        public ICommand LoginCommand { get; }
         
-        public LoginViewModel(ILoginService loginService)
+        public LoginViewModel(IAuthenticator authenticator)
         {
-            LoginCommand = new LoginCommand(this, loginService);
+            LoginCommand = new LoginCommand(this, authenticator);
         }
     }
 }
