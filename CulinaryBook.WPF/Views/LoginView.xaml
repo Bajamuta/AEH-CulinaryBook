@@ -8,10 +8,10 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Login page" />
         <WrapPanel Grid.Row="1" Orientation="Horizontal">
@@ -24,11 +24,9 @@
                 <PasswordBox Width="300" Margin="10 0 0 0" />
             </StackPanel>
         </WrapPanel>
-        <Button Grid.Row="2" Width="300" Height="Auto" Margin="0 20 0 0">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="LOGIN"/>
-            </StackPanel>
+        <Button Grid.Row="2" Width="300" Height="Auto" Margin="0 20 0 0"
+                Content="Login" Command="{Binding LoginCommand}">
         </Button>
-        <TextBlock Grid.Row="3" Text="{Binding LoginResult}" />
+        <TextBlock Grid.Row="3" Text="{Binding LoginResult, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </UserControl>

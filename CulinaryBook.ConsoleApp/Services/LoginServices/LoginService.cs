@@ -21,9 +21,8 @@ namespace CulinaryBook.ConsoleApp.Services.LoginServices
         public async Task<Author> Login(string login, string password)
         {
             Author storedAuthor = await _authorService.GetByLogin(login);
-            string hashedPassword = _hasher.HashPassword(storedAuthor, password);
             PasswordVerificationResult result = 
-                _hasher.VerifyHashedPassword(storedAuthor, storedAuthor.Password, hashedPassword);
+                _hasher.VerifyHashedPassword(storedAuthor, storedAuthor.Password, password);
 
             if (result != PasswordVerificationResult.Success)
             {
@@ -33,7 +32,7 @@ namespace CulinaryBook.ConsoleApp.Services.LoginServices
             return storedAuthor;
         }
 
-        public async Task<bool> Register(string name, string email, string login, string password, string confirmPassword)
+        public async Task<bool> Register(string name, string email, string login, string password, string confirmPassword, string type = "user")
         {
             bool success = false;
             
@@ -43,6 +42,7 @@ namespace CulinaryBook.ConsoleApp.Services.LoginServices
                 {
                     Name = name,
                     Login = login,
+                    Type = type,
                     Email = email,
                     Description = ""
                 };

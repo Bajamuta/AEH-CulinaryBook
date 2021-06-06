@@ -23,11 +23,10 @@ namespace CulinaryBook.WPF
         {
             // TODO Api: photos from internet
             IServiceProvider serviceProvider = CreateServiceProvider();
-            ILoginService authentication = serviceProvider.GetRequiredService<ILoginService>();
-            bool login = authentication.Register("Krzysztof Porządny",
-                "krzysztof@gmail.com", "porzadny", "P@$$w0rd", "P@$$w0rd").Result;
-            MessageBox.Show(login.ToString());
-            
+            //ILoginService authentication = serviceProvider.GetRequiredService<ILoginService>();
+            /*bool login = authentication.Register("Krzysztof Porządny",
+                "krzysztof@gmail.com", "porzadny", "P@$$w0rd", "P@$$w0rd", "user").Result;*/
+
             Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
 

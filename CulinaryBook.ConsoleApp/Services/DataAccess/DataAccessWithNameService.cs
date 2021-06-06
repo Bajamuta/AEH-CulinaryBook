@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CulinaryBook.ConsoleApp.Services.DataAccess
 {
