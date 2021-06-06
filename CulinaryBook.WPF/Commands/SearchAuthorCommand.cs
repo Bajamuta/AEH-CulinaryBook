@@ -3,24 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using CulinaryBook.ConsoleApp;
 using CulinaryBook.ConsoleApp.Models;
-using CulinaryBook.ConsoleApp.Services.IngredientServices;
+using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using CulinaryBook.WPF.Models;
 using CulinaryBook.WPF.ViewModels;
 
 namespace CulinaryBook.WPF.Commands
 {
-    public class SearchIngredientCommand : ICommand
+    public class SearchAuthorCommand : ICommand
     {
-        private IngredientsViewModel _ingredientsViewModel;
-        private IIngredientDataService _ingredientDataService;
+        private readonly AuthorsViewModel _authorsViewModel;
+        private readonly IAuthorDataService _authorDataService;
         
-        public SearchIngredientCommand(
-            IngredientsViewModel ingredientsViewModel, 
-            IIngredientDataService ingredientDataService)
+        public SearchAuthorCommand(
+            AuthorsViewModel authorsViewModel, 
+            IAuthorDataService authorDataService)
         {
-            _ingredientsViewModel = ingredientsViewModel;
-            _ingredientDataService = ingredientDataService;
+            _authorsViewModel = authorsViewModel;
+            _authorDataService = authorDataService;
         }
         
         public bool CanExecute(object? parameter)
@@ -33,17 +34,17 @@ namespace CulinaryBook.WPF.Commands
             List<ItemList> items = new List<ItemList>();
             try
             {
-                IEnumerable ingredients = await _ingredientDataService.GetByName(_ingredientsViewModel.Search);
-                
-                foreach (Ingredient ingredient in ingredients)
+                IEnumerable authors = await _authorDataService.GetByName(_authorsViewModel.Search);
+                // TODO if null
+                foreach (Author author in authors)
                 {
                     items.Add(new ItemList
                     {
-                        Title = ingredient.Name,
+                        Title = author.Name,
                         RecipeCount = "(" + 2 + ")"
                     });
                 }
-                _ingredientsViewModel.IngredientsList = items;
+                _authorsViewModel.AuthorsList = items;
             }
             catch (Exception e)
             {

@@ -27,7 +27,7 @@ namespace CulinaryBook.ConsoleApp.Services.BookServices
             return _service.Get(id);
         }
 
-        public Task<Book> GetByName(string name)
+        public Task<IEnumerable> GetByName(string name)
         {
             return _service.GetByName(name);
         }
