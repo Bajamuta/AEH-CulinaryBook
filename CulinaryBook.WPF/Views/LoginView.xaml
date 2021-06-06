@@ -6,7 +6,29 @@
              xmlns:local="clr-namespace:CulinaryBook.WPF.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Text="Login page"></TextBlock>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Login page" />
+        <WrapPanel Grid.Row="1" Orientation="Horizontal">
+           <StackPanel>
+               <Label Content="Login" Width="Auto"/>
+               <TextBox Width="300" Margin="10 0 0 0" />
+           </StackPanel>
+            <StackPanel>
+                <Label Content="Password" Width="Auto"/>
+                <PasswordBox Width="300" Margin="10 0 0 0" />
+            </StackPanel>
+        </WrapPanel>
+        <Button Grid.Row="2" Width="300" Height="Auto" Margin="0 20 0 0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="LOGIN"/>
+            </StackPanel>
+        </Button>
+        <TextBlock Grid.Row="3" Text="{Binding LoginResult}" />
     </Grid>
 </UserControl>
