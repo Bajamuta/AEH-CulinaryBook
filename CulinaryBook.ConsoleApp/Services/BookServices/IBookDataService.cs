@@ -8,7 +8,7 @@ namespace CulinaryBook.ConsoleApp.Services.BookServices
     {
         Task<IEnumerable> GetAll();
         Task<Book> Get(int id);
-        Task<Book> GetByName(string name);
+        Task<IEnumerable> GetByName(string name);
         Task<Book> Create(Book entity);
         Task<Book> Update(int id, Book entity);
         Task<bool> Delete(int id);

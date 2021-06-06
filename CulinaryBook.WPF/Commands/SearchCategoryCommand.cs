@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -32,13 +33,15 @@ namespace CulinaryBook.WPF.Commands
             List<ItemList> items = new List<ItemList>();
             try
             {
-                DbObjectWithName category = await _categoryDataService.GetByName(_categoriesViewModel.Search);
-                _categoriesViewModel.Category = category;
-                items.Add(new ItemList
+                IEnumerable categories = await _categoryDataService.GetByName(_categoriesViewModel.Search);
+                foreach (Category category in categories)
                 {
-                    Title = category.Name,
-                    RecipeCount = "(" + 2 + ")"
-                });
+                    items.Add(new ItemList
+                    {
+                        Title = category.Name,
+                        RecipeCount = "(" + 2 + ")"
+                    });
+                }
                 _categoriesViewModel.CategoriesList = items;
             }
             catch (Exception e)
