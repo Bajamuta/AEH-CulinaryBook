@@ -6,7 +6,34 @@
              xmlns:local="clr-namespace:CulinaryBook.WPF.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Text="Categories page"></TextBlock>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Categories page" />
+        <WrapPanel Grid.Row="1" VerticalAlignment="Center" Margin="0 20 0 0">
+            <TextBox Width="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Margin="20 0 0 0" Content="Search" Command="{Binding SearchCategoryCommand}"/>
+        </WrapPanel>
+        <ListBox Grid.Row="2" Width="600" Margin="0 20 0 0" HorizontalAlignment="Center" 
+                 BorderBrush="Transparent" ItemsSource="{Binding CategoriesList, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Grid.Column="1" Margin="10 0 0 0" Text="{Binding RecipeCount, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

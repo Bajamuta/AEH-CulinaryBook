@@ -3,6 +3,7 @@ using System.Windows;
 using CulinaryBook.ConsoleApp;
 using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using CulinaryBook.ConsoleApp.Services.BookServices;
+using CulinaryBook.ConsoleApp.Services.CategoryServices;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.WPF.State.Navigators;
 using CulinaryBook.WPF.ViewModels;
@@ -33,6 +34,7 @@ namespace CulinaryBook.WPF
             services.AddSingleton<IAuthorDataService, AuthorDataService>();
             services.AddSingleton<IIngredientDataService, IngredientDataService>();
             services.AddSingleton<IBookDataService, BookDataService>();
+            services.AddSingleton<ICategoryDataService, CategoryDataService>();
 
             services.AddSingleton<IViewModelAbstractFactory, ViewModelAbstractFactory>();
             services.AddSingleton<IViewModelFactory<HomeViewModel>, HomeViewFactory>();
