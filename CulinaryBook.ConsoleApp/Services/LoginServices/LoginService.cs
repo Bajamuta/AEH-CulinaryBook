@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CulinaryBook.ConsoleApp.Exceptions;
 using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using Microsoft.AspNetCore.Identity;
 
@@ -25,13 +26,14 @@ namespace CulinaryBook.ConsoleApp.Services.LoginServices
 
             if (result != PasswordVerificationResult.Success)
             {
-                throw new Exception();
+                throw new InvalidPasswordException(login, password);
             }
 
             return storedAuthor;
         }
 
-        public async Task<RegistrationResult> Register(string name, string email, string login, string password, string confirmPassword, string type = "user")
+        public async Task<RegistrationResult> Register(string name, string email, string login, 
+            string password, string confirmPassword, string type = "user")
         {
             // TODO UnitTesting authentication -> #13
             RegistrationResult registrationResult;
