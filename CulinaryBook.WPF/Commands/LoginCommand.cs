@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using CulinaryBook.ConsoleApp;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
+using CulinaryBook.WPF.Annotations;
 using CulinaryBook.WPF.ViewModels;
 
 namespace CulinaryBook.WPF.Commands
@@ -24,11 +25,11 @@ namespace CulinaryBook.WPF.Commands
             return true;
         }
 
-        public async void Execute(object? parameter)
+        public async void Execute([CanBeNull] object parameter)
         {
-            try
+            /*try
             {
-                Author loggedAuthor = await _loginService.Login("porzadny", "P@$$w0rd");
+                Author loggedAuthor = await _loginService.Login(userLogin, userPassword);
                 if (loggedAuthor != null)
                 {
                     _loginViewModel.Author = loggedAuthor;
@@ -43,7 +44,7 @@ namespace CulinaryBook.WPF.Commands
             catch (Exception e)
             {
                 throw new Exception();
-            }
+            }*/
         }
 
         public event EventHandler? CanExecuteChanged;

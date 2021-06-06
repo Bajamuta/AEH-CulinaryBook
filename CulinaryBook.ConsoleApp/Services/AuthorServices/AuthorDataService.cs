@@ -30,9 +30,14 @@ namespace CulinaryBook.ConsoleApp.Services.AuthorServices
             }
         }
         
-        public async Task<IEnumerable> GetByName(string name)
+        public async Task<IEnumerable> GetAllByName(string name)
         {
-            return await _service.GetByName(name);
+            return await _service.GetAllByName(name);
+        }
+
+        public async Task<Author> GetExactByName(string name)
+        {
+            return await _service.GetExactByName(name);
         }
         
         public async Task<IEnumerable> GetAll()

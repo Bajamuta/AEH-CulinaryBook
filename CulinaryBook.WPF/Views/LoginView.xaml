@@ -17,11 +17,11 @@
         <WrapPanel Grid.Row="1" Orientation="Horizontal">
            <StackPanel>
                <Label Content="Login" Width="Auto"/>
-               <TextBox Width="300" Margin="10 0 0 0" />
+               <TextBox Width="300" Margin="10 0 0 0" Text="{Binding UserLogin, UpdateSourceTrigger=PropertyChanged}"/>
            </StackPanel>
             <StackPanel>
                 <Label Content="Password" Width="Auto"/>
-                <PasswordBox Width="300" Margin="10 0 0 0" />
+                <PasswordBox Width="300" Margin="10 0 0 0" Password="{Binding UserPassword, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </WrapPanel>
         <Button Grid.Row="2" Width="300" Height="Auto" Margin="0 20 0 0"

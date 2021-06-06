@@ -9,6 +9,8 @@ namespace CulinaryBook.WPF.ViewModels
     {
         private string _loginResult;
         private Author _author;
+        private string _userLogin;
+        private string _userPassword;
 
         public Author Author
         {
@@ -30,11 +32,30 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
+        public string UserLogin
+        {
+            get => _userLogin;
+            set
+            {
+                _userLogin = value;
+                OnPropertyChanged(nameof(UserLogin));
+            }
+        }
+
+        public string UserPassword
+        {
+            get => _userPassword;
+            set
+            {
+                _userPassword = value;
+                OnPropertyChanged(nameof(UserPassword));
+            }
+        }
+
         public ICommand LoginCommand { get; set; }
         
         public LoginViewModel(ILoginService loginService)
         {
-            //SearchIngredientCommand = new SearchIngredientCommand(this, ingredientDataService);
             LoginCommand = new LoginCommand(this, loginService);
         }
     }

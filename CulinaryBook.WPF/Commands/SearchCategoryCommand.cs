@@ -33,7 +33,7 @@ namespace CulinaryBook.WPF.Commands
             List<ItemList> items = new List<ItemList>();
             try
             {
-                IEnumerable categories = await _categoryDataService.GetByName(_categoriesViewModel.Search);
+                IEnumerable categories = await _categoryDataService.GetAllByName(_categoriesViewModel.Search);
                 foreach (Category category in categories)
                 {
                     items.Add(new ItemList

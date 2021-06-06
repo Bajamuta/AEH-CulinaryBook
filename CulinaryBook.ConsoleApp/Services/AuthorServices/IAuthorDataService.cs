@@ -7,7 +7,8 @@ namespace CulinaryBook.ConsoleApp.Services.AuthorServices
     {
         Task<IEnumerable> GetAll();
         Task<Author> Get(int id);
-        Task<IEnumerable> GetByName(string name);
+        Task<IEnumerable> GetAllByName(string name);
+        Task<Author> GetExactByName(string name);
         Task<Author> GetByLogin(string login);
         Task<Author> Create(Author entity);
         Task<Author> Update(int id, Author entity);

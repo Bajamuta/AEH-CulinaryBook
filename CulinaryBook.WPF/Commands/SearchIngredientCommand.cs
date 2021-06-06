@@ -33,7 +33,7 @@ namespace CulinaryBook.WPF.Commands
             List<ItemList> items = new List<ItemList>();
             try
             {
-                IEnumerable ingredients = await _ingredientDataService.GetByName(_ingredientsViewModel.Search);
+                IEnumerable ingredients = await _ingredientDataService.GetAllByName(_ingredientsViewModel.Search);
                 
                 foreach (Ingredient ingredient in ingredients)
                 {

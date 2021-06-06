@@ -34,7 +34,7 @@ namespace CulinaryBook.WPF.Commands
             List<ItemList> items = new List<ItemList>();
             try
             {
-                IEnumerable authors = await _authorDataService.GetByName(_authorsViewModel.Search);
+                IEnumerable authors = await _authorDataService.GetAllByName(_authorsViewModel.Search);
                 // TODO if null
                 foreach (Author author in authors)
                 {
