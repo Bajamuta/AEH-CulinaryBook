@@ -3,11 +3,12 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using CulinaryBook.WPF.Annotations;
 using CulinaryBook.WPF.Commands;
+using CulinaryBook.WPF.Models;
 using CulinaryBook.WPF.ViewModels;
 
 namespace CulinaryBook.WPF.State.Navigators
 {
-    public class Navigator : INavigator, INotifyPropertyChanged
+    public class Navigator : ObservableObject, INavigator
     {
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
@@ -19,14 +20,6 @@ namespace CulinaryBook.WPF.State.Navigators
                 OnPropertyChanged(nameof(CurrentViewModel));
             }
         }
-
         public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

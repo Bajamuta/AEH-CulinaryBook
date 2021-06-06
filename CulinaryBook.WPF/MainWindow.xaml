@@ -15,5 +15,6 @@
         </Grid.RowDefinitions>
         <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}" />
         <ContentControl Grid.Row="1" Content="{Binding Navigator.CurrentViewModel}" />
+        <TextBlock Grid.Row="2" Text="All rights reserved" Background="{StaticResource SecondaryBrush4}" />
     </Grid>
 </Window>
