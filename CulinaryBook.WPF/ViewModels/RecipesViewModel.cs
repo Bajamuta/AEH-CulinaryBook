@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using CulinaryBook.ConsoleApp;
+using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.ConsoleApp.Services.RecipeServices;
 using CulinaryBook.WPF.Commands;
@@ -15,6 +16,7 @@ namespace CulinaryBook.WPF.ViewModels
     {
         private string _recipeName;
         private string _recipePhoto;
+        private Author _recipeAuthor;
         public string RecipeName
         {
             get => _recipeName;
@@ -35,7 +37,18 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
-        public Author RecipeAuthor { get; set; }
+        public Author RecipeAuthor
+        {
+            get => _recipeAuthor;
+            set
+            {
+                _recipeAuthor = value;
+                OnPropertyChanged(nameof(RecipeAuthor));
+                OnPropertyChanged(nameof(IsLogged));
+            }
+        }
+
+        public bool IsLogged => RecipeAuthor != null;
 
         public ICommand SearchRecipeCommand { get; }
         public ICommand AddRecipeCommand { get; }
@@ -45,19 +58,6 @@ namespace CulinaryBook.WPF.ViewModels
             if (authenticator.CurrentUser != null)
             {
                RecipeAuthor = authenticator.CurrentUser; 
-            }
-            else
-            {
-                RecipeAuthor = new Author()
-                {
-                    ID = 5,
-                    Name = "Testowy",
-                    Type = "test",
-                    Email = "test@test.com",
-                    Login = "test",
-                    Password = "test",
-                    Description = "Test test"
-                };
             }
             SearchRecipeCommand = new SearchRecipeCommand(this, recipeDataService);
             AddRecipeCommand = new AddRecipeCommand(this, recipeDataService);

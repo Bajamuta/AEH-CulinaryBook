@@ -43,16 +43,33 @@
                 </ListBox>
             </Grid>
         </WrapPanel>
-        <WrapPanel Grid.Column="1">
-            <StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Hidden" />
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsLogged, UpdateSourceTrigger=PropertyChanged}"
+                            Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
                 <Label Content="Name" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding RecipeName, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Grid.Row="1">
                 <Label Content="Photo" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding RecipePhoto, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <Button Content="Add Recipe" Command="{Binding AddRecipeCommand}" />
-        </WrapPanel>
+            <Button Grid.Row="2" Content="Add Recipe" Command="{Binding AddRecipeCommand}" />
+        </Grid>
     </Grid>
 </UserControl>

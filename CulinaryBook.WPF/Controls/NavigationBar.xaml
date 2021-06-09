@@ -61,7 +61,6 @@
             </Grid.ColumnDefinitions>
             <WrapPanel Grid.Column="1" Margin="0 0 20 0">
                 <TextBlock Text="Logged as" Margin="0 0 20 0" />
-                <TextBlock Text="{Binding Authenticator.IsLoggedIn, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                 <TextBlock Text="{Binding Authenticator.CurrentUser.Name}" />
             </WrapPanel>
             <RadioButton Grid.Column="2" Content="LOGOUT" Command="{Binding LogoutCommand}"
