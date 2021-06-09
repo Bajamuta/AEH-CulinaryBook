@@ -3,25 +3,26 @@ using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.WPF.Models;
+using CulinaryBook.WPF.State.Accounts;
 
 namespace CulinaryBook.WPF.State.Authenticators
 {
     public class Authenticator : ObservableObject, IAuthenticator
     {
         private readonly ILoginService _loginService;
-        private Author _currentUser;
-
-        public Authenticator(ILoginService loginService)
+        private readonly IAccountStore _accountStore;
+        public Authenticator(ILoginService loginService, IAccountStore accountStore)
         {
             _loginService = loginService;
+            _accountStore = accountStore;
         }
 
         public Author CurrentUser
         {
-            get => _currentUser;
+            get => _accountStore.CurrentAccount;
             private set
             {
-                _currentUser = value;
+                _accountStore.CurrentAccount = value;
                 OnPropertyChanged(nameof(CurrentUser));
                 OnPropertyChanged(nameof(IsLoggedIn));
             }
