@@ -5,6 +5,7 @@ using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using CulinaryBook.WPF.Commands;
 using CulinaryBook.WPF.Commands.Authors;
 using CulinaryBook.WPF.Models;
+using CulinaryBook.WPF.State.Authenticators;
 
 namespace CulinaryBook.WPF.ViewModels
 {
@@ -16,6 +17,7 @@ namespace CulinaryBook.WPF.ViewModels
         private string _authorPassword;
         private string _authorEmail;
         private string _authorDescription;
+        private string _loggedTypeUser;
 
         public string AuthorName
         {
@@ -78,11 +80,17 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
+        public string LoggedTypeUser => LoggedAuthor.Type;
+
         public ICommand SearchAuthorCommand { get; }
         public ICommand AddAuthorCommand { get; }
 
-        public AuthorsViewModel(IAuthorDataService authorDataService)
+        public AuthorsViewModel(IAuthorDataService authorDataService, IAuthenticator authenticator)
         {
+            if (authenticator.CurrentUser != null)
+            {
+                LoggedAuthor = authenticator.CurrentUser; 
+            }
             SearchAuthorCommand = new SearchAuthorCommand(this, authorDataService);
             AddAuthorCommand = new AddAuthorCommand(this, authorDataService);
             // TODO get all Authors

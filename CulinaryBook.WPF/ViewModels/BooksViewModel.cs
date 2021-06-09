@@ -5,6 +5,7 @@ using CulinaryBook.ConsoleApp.Services.BookServices;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.WPF.Commands;
 using CulinaryBook.WPF.Models;
+using CulinaryBook.WPF.State.Authenticators;
 
 namespace CulinaryBook.WPF.ViewModels
 {
@@ -23,8 +24,12 @@ namespace CulinaryBook.WPF.ViewModels
 
         public ICommand SearchBookCommand { get; set; }
 
-        public BooksViewModel(IBookDataService bookDataService)
+        public BooksViewModel(IBookDataService bookDataService, IAuthenticator authenticator)
         {
+            if (authenticator.CurrentUser != null)
+            {
+                LoggedAuthor = authenticator.CurrentUser; 
+            }
             SearchBookCommand = new SearchBookCommand(this, bookDataService);
             // TODO get all books
             ItemsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};

@@ -4,6 +4,7 @@ using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.CategoryServices;
 using CulinaryBook.WPF.Commands;
 using CulinaryBook.WPF.Models;
+using CulinaryBook.WPF.State.Authenticators;
 
 namespace CulinaryBook.WPF.ViewModels
 {
@@ -23,8 +24,12 @@ namespace CulinaryBook.WPF.ViewModels
 
         public ICommand SearchCategoryCommand { get; set; }
 
-        public CategoriesViewModel(ICategoryDataService categoryDataService)
+        public CategoriesViewModel(ICategoryDataService categoryDataService, IAuthenticator authenticator)
         {
+            if (authenticator.CurrentUser != null)
+            {
+                LoggedAuthor = authenticator.CurrentUser; 
+            }
             SearchCategoryCommand = new SearchCategoryCommand(this, categoryDataService);
             // TODO get all Categorys
             ItemsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};

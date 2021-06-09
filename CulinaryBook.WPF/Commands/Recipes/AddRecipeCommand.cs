@@ -30,7 +30,7 @@ namespace CulinaryBook.WPF.Commands.Recipes
                             {
                                 Name = _recipesViewModel.RecipeName,
                                 Photo = _recipesViewModel.RecipePhoto,
-                                Id_Author = _recipesViewModel.RecipeAuthor.ID
+                                Id_Author = _recipesViewModel.LoggedAuthor.ID
                             });
                     }
                     catch (Exception e)

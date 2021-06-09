@@ -16,7 +16,6 @@ namespace CulinaryBook.WPF.ViewModels
     {
         private string _recipeName;
         private string _recipePhoto;
-        private Author _recipeAuthor;
         public string RecipeName
         {
             get => _recipeName;
@@ -37,19 +36,6 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
-        public Author RecipeAuthor
-        {
-            get => _recipeAuthor;
-            set
-            {
-                _recipeAuthor = value;
-                OnPropertyChanged(nameof(RecipeAuthor));
-                OnPropertyChanged(nameof(IsLogged));
-            }
-        }
-
-        public bool IsLogged => RecipeAuthor != null;
-
         public ICommand SearchRecipeCommand { get; }
         public ICommand AddRecipeCommand { get; }
 
@@ -57,7 +43,7 @@ namespace CulinaryBook.WPF.ViewModels
         {
             if (authenticator.CurrentUser != null)
             {
-               RecipeAuthor = authenticator.CurrentUser; 
+               LoggedAuthor = authenticator.CurrentUser; 
             }
             SearchRecipeCommand = new SearchRecipeCommand(this, recipeDataService);
             AddRecipeCommand = new AddRecipeCommand(this, recipeDataService);

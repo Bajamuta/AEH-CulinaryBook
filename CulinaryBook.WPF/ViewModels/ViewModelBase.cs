@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CulinaryBook.ConsoleApp;
 using CulinaryBook.WPF.Models;
 
 namespace CulinaryBook.WPF.ViewModels
@@ -7,6 +8,7 @@ namespace CulinaryBook.WPF.ViewModels
     {
         private string _search;
         private List<ItemList> _items;
+        private Author _loggedAuthor;
         public string Search
         {
             get => _search;
@@ -26,5 +28,18 @@ namespace CulinaryBook.WPF.ViewModels
                 OnPropertyChanged(nameof(ItemsList));
             }
         }
+        
+        public Author LoggedAuthor
+        {
+            get => _loggedAuthor;
+            set
+            {
+                _loggedAuthor = value;
+                OnPropertyChanged(nameof(LoggedAuthor));
+                OnPropertyChanged(nameof(IsLogged));
+            }
+        }
+
+        public bool IsLogged => LoggedAuthor != null;
     }
 }

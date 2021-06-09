@@ -11,8 +11,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Column="0">
-            <Grid>
+        <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -42,33 +41,54 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
             </Grid>
-        </WrapPanel>
-        <WrapPanel Grid.Column="1">
-            <StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Hidden" />
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding LoggedTypeUser, UpdateSourceTrigger=PropertyChanged}"
+                            Value="admin">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
                 <Label Content="Name" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding AuthorName, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Grid.Row="1">
                 <Label Content="Type" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding AuthorType, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Grid.Row="2">
                 <Label Content="Email" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding AuthorEmail, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Grid.Row="3">
                 <Label Content="Login" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding AuthorLogin, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Grid.Row="4">
                 <Label Content="Password" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding AuthorPassword, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Grid.Row="5">
                 <Label Content="Description" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding AuthorDescription, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <Button Content="Add Author" Command="{Binding AddAuthorCommand}" />
-        </WrapPanel>
+            <Button Grid.Row="6" Content="Add Author" Command="{Binding AddAuthorCommand}" />
+        </Grid>
+
     </Grid>
 </UserControl>
