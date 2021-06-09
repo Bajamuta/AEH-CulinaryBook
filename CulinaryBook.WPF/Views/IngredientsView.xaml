@@ -44,16 +44,34 @@
                 </ListBox>
             </Grid>
         </WrapPanel>
-        <WrapPanel Grid.Column="1">
-            <StackPanel>
+        <Grid Column="1">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Hidden" />
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsLogged, UpdateSourceTrigger=PropertyChanged}"
+                            Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>     
+            <StackPanel Grid.Row="0">
                 <Label Content="Name" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding IngredientName, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Grid.Row="1">
                 <Label Content="Junit" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding IngredientJunit, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <Button Content="Add Ingredient" Command="{Binding AddIngredientCommand}" />
-        </WrapPanel>
+            <Button Grid.Row="2" Content="Add Ingredient" Command="{Binding AddIngredientCommand}" />
+        </Grid>
+        
     </Grid>
 </UserControl>
