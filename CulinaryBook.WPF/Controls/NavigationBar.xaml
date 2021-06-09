@@ -11,6 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="CULINARY BOOKS" Background="{StaticResource SecondaryBrush3}"/>
         <Grid Grid.Row="1">
@@ -24,7 +25,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0" Content="HOME" Command="{Binding UpdateCurrentViewModelCommand}"
+            <RadioButton Grid.Column="0" Content="HOME" 
+                         Command="{Binding UpdateCurrentViewModelCommand}"
                          CommandParameter="{x:Static nav:ViewType.Home}"/>
             <RadioButton Grid.Column="1" Content="BOOKS" Command="{Binding UpdateCurrentViewModelCommand}"
                          CommandParameter="{x:Static nav:ViewType.Books}" />
@@ -38,6 +40,26 @@
                          CommandParameter="{x:Static nav:ViewType.Authors}" />
             <RadioButton Grid.Column="6" Content="LOGIN" Command="{Binding UpdateCurrentViewModelCommand}"
                          CommandParameter="{x:Static nav:ViewType.Login}" />
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Authenticator.IsLoggedIn}"></DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <WrapPanel Grid.Column="1">
+                <TextBlock Text="Logged as" />
+                <TextBlock Text="{Binding Authenticator.CurrentUser}" />
+            </WrapPanel>
+            <RadioButton Grid.Column="2" Content="LOGOUT" Command="{Binding UpdateCurrentViewModelCommand}"
+                         CommandParameter="{x:Static nav:ViewType.Logout}"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -2,19 +2,31 @@
 using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
+using CulinaryBook.WPF.Models;
 
 namespace CulinaryBook.WPF.State.Authenticators
 {
-    public class Authenticator : IAuthenticator
+    public class Authenticator : ObservableObject, IAuthenticator
     {
         private readonly ILoginService _loginService;
+        private Author _currentUser;
 
         public Authenticator(ILoginService loginService)
         {
             _loginService = loginService;
         }
 
-        public Author CurrentUser { get; private set; }
+        public Author CurrentUser
+        {
+            get => _currentUser;
+            private set
+            {
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+                OnPropertyChanged(nameof(IsLoggedIn));
+            }
+        }
+
         public bool IsLoggedIn => CurrentUser != null;
         
         public async Task<RegistrationResult> Register(string name, string email, string login, string password, string confirmPassword)

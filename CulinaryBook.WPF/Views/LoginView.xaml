@@ -25,7 +25,7 @@
             </StackPanel>
         </WrapPanel>
         <Button Grid.Row="2" Width="300" Height="Auto" Margin="0 20 0 0"
-                Content="Login" Click="LoginClick">
+                Content="Login" Click="LoginClick" IsDefault="True">
         </Button>
         <TextBlock Grid.Row="3" Text="{Binding LoginResult, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>

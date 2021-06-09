@@ -3,6 +3,7 @@ using CulinaryBook.ConsoleApp;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.WPF.Commands;
 using CulinaryBook.WPF.State.Authenticators;
+using CulinaryBook.WPF.State.Navigators;
 
 namespace CulinaryBook.WPF.ViewModels
 {
@@ -11,7 +12,6 @@ namespace CulinaryBook.WPF.ViewModels
         private string _loginResult;
         private Author _author;
         private string _userLogin;
-        private string _userPassword;
 
         public Author Author
         {
@@ -43,21 +43,11 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
-        public string UserPassword
-        {
-            get => _userPassword;
-            set
-            {
-                _userPassword = value;
-                OnPropertyChanged(nameof(UserPassword));
-            }
-        }
-
         public ICommand LoginCommand { get; }
         
-        public LoginViewModel(IAuthenticator authenticator)
+        public LoginViewModel(IAuthenticator authenticator, INavigator navigator)
         {
-            LoginCommand = new LoginCommand(this, authenticator);
+            LoginCommand = new LoginCommand(this, authenticator, navigator);
         }
     }
 }

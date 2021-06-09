@@ -21,11 +21,5 @@ namespace CulinaryBook.WPF.State.Navigators
                 OnPropertyChanged(nameof(CurrentViewModel));
             }
         }
-        public ICommand UpdateCurrentViewModelCommand { get; set; }
-
-        public Navigator(IViewModelAbstractFactory viewModelAbstractFactory)
-        {
-            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelAbstractFactory);
-        }
     }
 }

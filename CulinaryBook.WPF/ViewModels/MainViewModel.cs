@@ -1,15 +1,27 @@
-﻿using CulinaryBook.WPF.State.Navigators;
+﻿using System.Windows.Input;
+using CulinaryBook.WPF.Commands;
+using CulinaryBook.WPF.State.Authenticators;
+using CulinaryBook.WPF.State.Navigators;
+using CulinaryBook.WPF.ViewModels.Factories;
 
 namespace CulinaryBook.WPF.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private readonly IViewModelAbstractFactory _viewModelAbstractFactory;
         public INavigator Navigator { get; }
+        public IAuthenticator Authenticator { get; }
+        
+        public ICommand UpdateCurrentViewModelCommand { get; }
 
-        public MainViewModel(INavigator navigator)
+        public MainViewModel(INavigator navigator, IAuthenticator authenticator, 
+            IViewModelAbstractFactory viewModelAbstractFactory)
         {
             Navigator = navigator;
-            Navigator.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
+            Authenticator = authenticator;
+            _viewModelAbstractFactory = viewModelAbstractFactory;
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelAbstractFactory);
+            UpdateCurrentViewModelCommand.Execute(ViewType.Home);
         }
 
     }
