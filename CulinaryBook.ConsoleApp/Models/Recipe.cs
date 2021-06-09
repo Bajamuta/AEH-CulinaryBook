@@ -10,6 +10,8 @@ namespace CulinaryBook.ConsoleApp.Models
         public Recipe()
         {
             IngredientsLists = new List<IngredientsList>();
+            RecipesLists = new List<RecipesList>();
+            StepsLists = new List<StepsList>();
         }
         public string Photo { get; set; }
         

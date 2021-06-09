@@ -42,7 +42,7 @@ namespace CulinaryBook.WPF.Commands
                         RecipeCount = "(" + 2 + ")"
                     });
                 }
-                _booksViewModel.BooksList = items;
+                _booksViewModel.ItemsList = items;
             }
             catch (Exception e)
             {

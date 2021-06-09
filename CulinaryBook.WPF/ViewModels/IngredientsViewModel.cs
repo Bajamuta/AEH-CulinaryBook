@@ -10,7 +10,8 @@ namespace CulinaryBook.WPF.ViewModels
     public class IngredientsViewModel : ViewModelBase
     {
         private DbObjectWithName _ingredient;
-        private List<ItemList> _ingredientsList;
+        private string _ingredientName;
+        private string _ingredientJunit;
 
         public DbObjectWithName Ingredient
         {
@@ -22,23 +23,35 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
-        public List<ItemList> IngredientsList
+        public string IngredientName
         {
-            get => _ingredientsList;
+            get => _ingredientName;
             set
             {
-                _ingredientsList = value;
-                OnPropertyChanged(nameof(IngredientsList));
+                _ingredientName = value;
+                OnPropertyChanged(nameof(IngredientName));
             }
         }
 
-        public ICommand SearchIngredientCommand { get; set; }
+        public string IngredientJunit
+        {
+            get => _ingredientJunit;
+            set
+            {
+                _ingredientJunit = value;
+                OnPropertyChanged(nameof(IngredientJunit));
+            }
+        }
+
+        public ICommand SearchIngredientCommand { get; }
+        public ICommand AddIngredientCommand { get; }
 
         public IngredientsViewModel(IIngredientDataService ingredientDataService)
         {
             SearchIngredientCommand = new SearchIngredientCommand(this, ingredientDataService);
+            AddIngredientCommand = new AddIngredientCommand(this, ingredientDataService);
             // TODO get all ingredients
-            IngredientsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
+            ItemsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
         }
     }
 }

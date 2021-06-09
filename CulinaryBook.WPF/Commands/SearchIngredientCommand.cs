@@ -43,7 +43,7 @@ namespace CulinaryBook.WPF.Commands
                         RecipeCount = "(" + 2 + ")"
                     });
                 }
-                _ingredientsViewModel.IngredientsList = items;
+                _ingredientsViewModel.ItemsList = items;
             }
             catch (Exception e)
             {

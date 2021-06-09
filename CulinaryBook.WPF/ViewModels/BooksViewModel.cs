@@ -11,8 +11,6 @@ namespace CulinaryBook.WPF.ViewModels
     public class BooksViewModel : ViewModelBase
     {
         private DbObjectWithName _book;
-        private List<ItemList> _booksList;
-
         public DbObjectWithName Book
         {
             get => _book;
@@ -23,23 +21,13 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
-        public List<ItemList> BooksList
-        {
-            get => _booksList;
-            set
-            {
-                _booksList = value;
-                OnPropertyChanged(nameof(BooksList));
-            }
-        }
-
         public ICommand SearchBookCommand { get; set; }
 
         public BooksViewModel(IBookDataService bookDataService)
         {
             SearchBookCommand = new SearchBookCommand(this, bookDataService);
             // TODO get all books
-            BooksList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
+            ItemsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
         }
     }
 }

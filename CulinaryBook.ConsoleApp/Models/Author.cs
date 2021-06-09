@@ -10,6 +10,11 @@ namespace CulinaryBook.ConsoleApp
     {
        // We do not need the id parameter because we use DbObject
         // TODO add enum types
+        public Author()
+        {
+            Recipes = new List<Recipe>();
+        }
+        
         [Required]
         public string Type { get; set; }
 
