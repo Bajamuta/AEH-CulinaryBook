@@ -9,20 +9,9 @@ namespace CulinaryBook.WPF.ViewModels
 {
     public class IngredientsViewModel : ViewModelBase
     {
-        private DbObjectWithName _ingredient;
         private string _ingredientName;
         private string _ingredientJunit;
-
-        public DbObjectWithName Ingredient
-        {
-            get => _ingredient;
-            set
-            {
-                _ingredient = value;
-                OnPropertyChanged(nameof(Ingredient));
-            }
-        }
-
+        
         public string IngredientName
         {
             get => _ingredientName;

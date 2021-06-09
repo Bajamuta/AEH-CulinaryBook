@@ -9,23 +9,81 @@ namespace CulinaryBook.WPF.ViewModels
 {
     public class AuthorsViewModel : ViewModelBase
     {
-        private DbObjectWithName _author;
+        private string _authorName;
+        private string _authorType;
+        private string _authorLogin;
+        private string _authorPassword;
+        private string _authorEmail;
+        private string _authorDescription;
 
-        public DbObjectWithName Author
+        public string AuthorName
         {
-            get => _author;
+            get => _authorName;
             set
             {
-                _author = value;
-                OnPropertyChanged(nameof(Author));
+                _authorName = value;
+                OnPropertyChanged(nameof(AuthorName));
             }
         }
 
-        public ICommand SearchAuthorCommand { get; set; }
+        public string AuthorLogin
+        {
+            get => _authorLogin;
+            set
+            {
+                _authorLogin = value;
+                OnPropertyChanged(nameof(AuthorLogin));
+            }
+        }
+
+        public string AuthorPassword
+        {
+            get => _authorPassword;
+            set
+            {
+                // TODO change to getProperty
+                _authorPassword = value;
+                OnPropertyChanged(nameof(AuthorPassword));
+            }
+        }
+
+        public string AuthorType
+        {
+            get => _authorType;
+            set
+            {
+                _authorType = value;
+                OnPropertyChanged(nameof(AuthorType));
+            }
+        }
+
+        public string AuthorDescription
+        {
+            get => _authorDescription;
+            set
+            {
+                _authorDescription = value;
+                OnPropertyChanged(nameof(AuthorDescription));
+            }
+        }
+
+        public string AuthorEmail
+        {
+            get => _authorEmail;
+            set
+            {
+                _authorEmail = value;
+                OnPropertyChanged(AuthorEmail);
+            }
+        }
+
+        public ICommand SearchAuthorCommand { get; }
+        public ICommand AddAuthorCommand { get; }
 
         public AuthorsViewModel(IAuthorDataService authorDataService)
         {
             SearchAuthorCommand = new SearchAuthorCommand(this, authorDataService);
+            AddAuthorCommand = new AddAuthorCommand(this, authorDataService);
             // TODO get all Authors
             ItemsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
         }

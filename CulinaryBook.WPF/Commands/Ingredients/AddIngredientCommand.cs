@@ -9,7 +9,7 @@ namespace CulinaryBook.WPF.Commands
     public class AddIngredientCommand : ICommand
     {
         private readonly IIngredientDataService _service;
-        private IngredientsViewModel _ingredientsViewModel;
+        private readonly IngredientsViewModel _ingredientsViewModel;
         public AddIngredientCommand(IngredientsViewModel ingredientsViewModel, IIngredientDataService service)
         {
             _service = service;
