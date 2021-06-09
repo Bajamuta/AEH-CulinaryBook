@@ -44,8 +44,13 @@
         <Grid Grid.Row="2">
             <Grid.Style>
                 <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Hidden" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Authenticator.IsLoggedIn}"></DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding Authenticator.IsLoggedIn, UpdateSourceTrigger=PropertyChanged}"
+                            Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
@@ -54,9 +59,10 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <WrapPanel Grid.Column="1">
-                <TextBlock Text="Logged as" />
-                <TextBlock Text="{Binding Authenticator.CurrentUser}" />
+            <WrapPanel Grid.Column="1" Margin="0 0 20 0">
+                <TextBlock Text="Logged as" Margin="0 0 20 0" />
+                <TextBlock Text="{Binding Authenticator.IsLoggedIn, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock Text="{Binding Authenticator.CurrentUser.Name}" />
             </WrapPanel>
             <RadioButton Grid.Column="2" Content="LOGOUT" Command="{Binding LogoutCommand}"
                          CommandParameter="{x:Static nav:ViewType.Logout}"/>
