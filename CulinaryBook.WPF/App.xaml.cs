@@ -52,7 +52,12 @@ namespace CulinaryBook.WPF
             services.AddSingleton<IViewModelFactory<CategoriesViewModel>, CategoriesViewFactory>();
             services.AddSingleton<IViewModelFactory<IngredientsViewModel>, IngredientsViewFactory>();
             services.AddSingleton<IViewModelFactory<RecipesViewModel>, RecipesViewFactory>();
-            services.AddSingleton<IViewModelFactory<LoginViewModel>, LoginViewFactory>();
+            services.AddSingleton<IViewModelFactory<LoginViewModel>>(
+                (services) => new LoginViewFactory(services.GetRequiredService<IAuthenticator>(),
+                    new Renavigator<HomeViewModel>(
+                        services.GetRequiredService<INavigator>(),
+                        services.GetRequiredService<IViewModelFactory<HomeViewModel>>()
+                        )));
             services.AddSingleton<IViewModelFactory<LogoutViewModel>, LogoutViewFactory>();
             
             services.AddScoped<INavigator, Navigator>();

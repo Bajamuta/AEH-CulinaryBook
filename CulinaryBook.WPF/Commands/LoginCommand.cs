@@ -3,6 +3,7 @@ using System.Windows.Input;
 using CulinaryBook.WPF.State.Authenticators;
 using CulinaryBook.WPF.State.Navigators;
 using CulinaryBook.WPF.ViewModels;
+using CulinaryBook.WPF.ViewModels.Factories;
 
 namespace CulinaryBook.WPF.Commands
 {
@@ -10,14 +11,14 @@ namespace CulinaryBook.WPF.Commands
     {
         private readonly LoginViewModel _loginViewModel;
         private readonly IAuthenticator _authenticator;
-        private readonly INavigator _navigator;
+        private readonly IRenavigator _renavigator;
         public LoginCommand(
-            LoginViewModel loginViewModel, IAuthenticator authenticator,
-            INavigator navigator)
+            LoginViewModel loginViewModel, IAuthenticator authenticator, 
+            IRenavigator renavigator)
         {
             _loginViewModel = loginViewModel;
             _authenticator = authenticator;
-            _navigator = navigator;
+            _renavigator = renavigator;
         }
         
         public bool CanExecute(object? parameter)
@@ -31,6 +32,8 @@ namespace CulinaryBook.WPF.Commands
             if (success)
             {
                 _loginViewModel.Author = _authenticator.CurrentUser;
+                // TODO if needed to add sth #16 9:20
+                _renavigator.Renavigate();
             }
             else
             {
