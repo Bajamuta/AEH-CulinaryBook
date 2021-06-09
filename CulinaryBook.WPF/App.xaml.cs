@@ -6,6 +6,7 @@ using CulinaryBook.ConsoleApp.Services.BookServices;
 using CulinaryBook.ConsoleApp.Services.CategoryServices;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
+using CulinaryBook.ConsoleApp.Services.RecipeServices;
 using CulinaryBook.WPF.State.Accounts;
 using CulinaryBook.WPF.State.Authenticators;
 using CulinaryBook.WPF.State.Navigators;
@@ -43,6 +44,7 @@ namespace CulinaryBook.WPF
             services.AddSingleton<IIngredientDataService, IngredientDataService>();
             services.AddSingleton<IBookDataService, BookDataService>();
             services.AddSingleton<ICategoryDataService, CategoryDataService>();
+            services.AddSingleton<IRecipeDataService, RecipeDataService>();
             services.AddSingleton<ILoginService, LoginService>();
             services.AddSingleton<IPasswordHasher<Author>, PasswordHasher<Author>>();
 

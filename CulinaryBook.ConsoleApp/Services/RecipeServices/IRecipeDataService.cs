@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.DataAccess;
 
-namespace CulinaryBook.ConsoleApp.Services.CategoryServices
+namespace CulinaryBook.ConsoleApp.Services.RecipeServices
 {
-    public interface ICategoryDataService : IDataService<Category>
+    public interface IRecipeDataService : IDataService<Recipe>
     {
         Task<IEnumerable> GetAllByName(string name);
     }

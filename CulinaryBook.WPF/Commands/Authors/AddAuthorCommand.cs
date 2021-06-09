@@ -4,12 +4,12 @@ using CulinaryBook.ConsoleApp;
 using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using CulinaryBook.WPF.ViewModels;
 
-namespace CulinaryBook.WPF.Commands
+namespace CulinaryBook.WPF.Commands.Authors
 {
     public class AddAuthorCommand : ICommand
     {
         private readonly IAuthorDataService _service;
-        private AuthorsViewModel _authorsViewModel;
+        private readonly AuthorsViewModel _authorsViewModel;
         public AddAuthorCommand(AuthorsViewModel authorsViewModel, IAuthorDataService service)
         {
             _service = service;

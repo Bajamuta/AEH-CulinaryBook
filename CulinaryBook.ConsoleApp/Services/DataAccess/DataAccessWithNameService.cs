@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CulinaryBook.ConsoleApp.Services.DataAccess
 {
-    public class DataAccessWithNameService<T> where T : DbObjectWithName
+    public class DataAccessWithNameService<T> : IDataService<T> where T : DbObjectWithName
     {
         private readonly CulinaryBookContextFactory _contextFactory;
         private readonly DataAccessService<T> _service;

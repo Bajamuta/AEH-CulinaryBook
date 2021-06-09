@@ -12,8 +12,8 @@ namespace CulinaryBook.WPF.Commands
 {
     public class SearchIngredientCommand : ICommand
     {
-        private IngredientsViewModel _ingredientsViewModel;
-        private IIngredientDataService _ingredientDataService;
+        private readonly IngredientsViewModel _ingredientsViewModel;
+        private readonly IIngredientDataService _ingredientDataService;
         
         public SearchIngredientCommand(
             IngredientsViewModel ingredientsViewModel, 

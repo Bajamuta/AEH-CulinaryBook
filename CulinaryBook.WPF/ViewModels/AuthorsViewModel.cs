@@ -3,6 +3,7 @@ using System.Windows.Input;
 using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using CulinaryBook.WPF.Commands;
+using CulinaryBook.WPF.Commands.Authors;
 using CulinaryBook.WPF.Models;
 
 namespace CulinaryBook.WPF.ViewModels

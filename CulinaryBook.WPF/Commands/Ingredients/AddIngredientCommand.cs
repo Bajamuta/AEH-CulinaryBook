@@ -4,7 +4,7 @@ using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.WPF.ViewModels;
 
-namespace CulinaryBook.WPF.Commands
+namespace CulinaryBook.WPF.Commands.Ingredients
 {
     public class AddIngredientCommand : ICommand
     {

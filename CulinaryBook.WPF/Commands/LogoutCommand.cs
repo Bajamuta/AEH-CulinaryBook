@@ -22,7 +22,7 @@ namespace CulinaryBook.WPF.Commands
             return true;
         }
 
-        public async void Execute(object? parameter)
+        public void Execute(object? parameter)
         {
             try
             {
