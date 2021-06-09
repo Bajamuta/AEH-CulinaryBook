@@ -13,6 +13,8 @@ namespace CulinaryBook.WPF.ViewModels
         public IAuthenticator Authenticator { get; }
         
         public ICommand UpdateCurrentViewModelCommand { get; }
+        
+        public ICommand LogoutCommand { get; }
 
         public MainViewModel(INavigator navigator, IAuthenticator authenticator, 
             IViewModelAbstractFactory viewModelAbstractFactory)
@@ -21,6 +23,7 @@ namespace CulinaryBook.WPF.ViewModels
             Authenticator = authenticator;
             _viewModelAbstractFactory = viewModelAbstractFactory;
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelAbstractFactory);
+            LogoutCommand = new LogoutCommand(Authenticator, Navigator);
             UpdateCurrentViewModelCommand.Execute(ViewType.Home);
         }
 

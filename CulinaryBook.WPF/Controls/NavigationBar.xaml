@@ -58,7 +58,7 @@
                 <TextBlock Text="Logged as" />
                 <TextBlock Text="{Binding Authenticator.CurrentUser}" />
             </WrapPanel>
-            <RadioButton Grid.Column="2" Content="LOGOUT" Command="{Binding UpdateCurrentViewModelCommand}"
+            <RadioButton Grid.Column="2" Content="LOGOUT" Command="{Binding LogoutCommand}"
                          CommandParameter="{x:Static nav:ViewType.Logout}"/>
         </Grid>
     </Grid>
