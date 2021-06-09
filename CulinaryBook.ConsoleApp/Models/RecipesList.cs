@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CulinaryBook.ConsoleApp.Models
 {
     [Table("RECIPES_LIST")]
-    public class RecipesList : DbObject
+    public class RecipesList
     {
+        [Key]
         [ForeignKey("Recipe")]
         public int Id_Recipe { get; set; }
         public Recipe Recipe { get; set; }

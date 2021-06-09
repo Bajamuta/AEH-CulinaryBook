@@ -39,7 +39,20 @@
             <RadioButton Grid.Column="5" Content="AUTHORS" Command="{Binding UpdateCurrentViewModelCommand}"
                          CommandParameter="{x:Static nav:ViewType.Authors}" />
             <RadioButton Grid.Column="6" Content="LOGIN" Command="{Binding UpdateCurrentViewModelCommand}"
-                         CommandParameter="{x:Static nav:ViewType.Login}" />
+                         CommandParameter="{x:Static nav:ViewType.Login}" >
+                <RadioButton.Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="Visibility" Value="Visible"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Authenticator.IsLoggedIn, UpdateSourceTrigger=PropertyChanged}"
+                                Value="True">
+                                <Setter Property="Visibility" Value="Hidden" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </RadioButton.Style>
+            </RadioButton>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.Style>
