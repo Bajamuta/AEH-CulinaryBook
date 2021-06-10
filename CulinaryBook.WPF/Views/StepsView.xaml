@@ -97,6 +97,7 @@
                 <Label Content="New Description" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding StepDescription}"/>
                 <Button Content="Update Step" Command="{Binding UpdateStepCommand}" />
+                <Button Content="Delete Step" Command="{Binding DeleteStepCommand}" />
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">

@@ -54,6 +54,7 @@ namespace CulinaryBook.WPF.ViewModels
         public ICommand SearchStepCommand { get; }
         public ICommand GetAllStepsCommand { get; }
         public ICommand UpdateStepCommand { get; }
+        public ICommand DeleteStepCommand { get; }
 
         public StepsViewModel(IStepService stepDataService, IAuthenticator authenticator)
         {
@@ -65,6 +66,7 @@ namespace CulinaryBook.WPF.ViewModels
             SearchStepCommand = new SearchStepCommand(this, stepDataService);
             GetAllStepsCommand = new GetAllStepsCommand(this, stepDataService);
             UpdateStepCommand = new UpdateStepCommand(this, stepDataService);
+            DeleteStepCommand = new DeleteStepCommand(this, stepDataService);
         }
     }
 }
