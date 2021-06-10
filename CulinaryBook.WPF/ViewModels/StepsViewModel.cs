@@ -16,6 +16,7 @@ namespace CulinaryBook.WPF.ViewModels
         private string _stepDescription;
         private Step _selectedStep;
         private List<Step> _steps;
+        private bool _isSelectedStep;
 
         public string StepDescription
         {
@@ -34,6 +35,7 @@ namespace CulinaryBook.WPF.ViewModels
             {
                 _selectedStep = value;
                 OnPropertyChanged(nameof(SelectedStep));
+                OnPropertyChanged(nameof(IsSelectedStep));
             }
         }
 
@@ -46,9 +48,12 @@ namespace CulinaryBook.WPF.ViewModels
                 OnPropertyChanged(nameof(Steps));
             }
         }
+
+        public bool IsSelectedStep => SelectedStep != null;
         public ICommand AddStepCommand { get; }
         public ICommand SearchStepCommand { get; }
         public ICommand GetAllStepsCommand { get; }
+        public ICommand UpdateStepCommand { get; }
 
         public StepsViewModel(IStepService stepDataService, IAuthenticator authenticator)
         {
@@ -59,6 +64,7 @@ namespace CulinaryBook.WPF.ViewModels
             AddStepCommand = new AddStepCommand(this, stepDataService);
             SearchStepCommand = new SearchStepCommand(this, stepDataService);
             GetAllStepsCommand = new GetAllStepsCommand(this, stepDataService);
+            UpdateStepCommand = new UpdateStepCommand(this, stepDataService);
         }
     }
 }

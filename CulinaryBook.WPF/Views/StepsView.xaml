@@ -61,12 +61,43 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>     
+            </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
-                <Label Content="Name" Width="Auto"/>
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsSelectedStep, UpdateSourceTrigger=PropertyChanged}" 
+                                Value="True">
+                                <Setter Property="Visibility" Value="Hidden" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <Label Content="Description" Width="Auto"/>
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding StepDescription, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Content="Add Step" Command="{Binding AddStepCommand}" />
             </StackPanel>
-            <Button Grid.Row="1" Content="Add Ingredient" Command="{Binding AddStepCommand}" />
+            <StackPanel Grid.Row="0">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsSelectedStep, UpdateSourceTrigger=PropertyChanged}" 
+                                Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <Label Content="Old Description" Width="Auto"/>
+                <TextBlock Text="{Binding SelectedStep.Description}" />
+                <Label Content="New Description" Width="Auto"/>
+                <TextBox Width="300" Margin="10 0 0 0" Text="{Binding StepDescription}"/>
+                <Button Content="Update Step" Command="{Binding UpdateStepCommand}" />
+            </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.Style>
