@@ -35,6 +35,7 @@ namespace CulinaryBook.WPF.ViewModels
         }
         public ICommand SearchCategoryCommand { get; }
         public ICommand AddCategoryCommand { get; }
+        public ICommand GetAllCategoriesCommand { get; }
 
         public CategoriesViewModel(ICategoryDataService categoryDataService, IAuthenticator authenticator)
         {
@@ -44,8 +45,7 @@ namespace CulinaryBook.WPF.ViewModels
             }
             SearchCategoryCommand = new SearchCategoryCommand(this, categoryDataService);
             AddCategoryCommand = new AddCategoryCommand(this, categoryDataService);
-            // TODO get all Categorys
-            ItemsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
+            GetAllCategoriesCommand = new GetAllCategoriesCommand(this, categoryDataService);
         }
     }
 }

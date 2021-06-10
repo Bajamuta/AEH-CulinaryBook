@@ -36,6 +36,7 @@ namespace CulinaryBook.WPF.ViewModels
         
         public ICommand SearchIngredientCommand { get; }
         public ICommand AddIngredientCommand { get; }
+        public ICommand GetAllIngredientsCommand { get; }
 
         public IngredientsViewModel(IIngredientDataService ingredientDataService, IAuthenticator authenticator)
         {
@@ -45,8 +46,7 @@ namespace CulinaryBook.WPF.ViewModels
             }
             SearchIngredientCommand = new SearchIngredientCommand(this, ingredientDataService);
             AddIngredientCommand = new AddIngredientCommand(this, ingredientDataService);
-            // TODO get all ingredients
-            ItemsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
+            GetAllIngredientsCommand = new GetAllIngredientsCommand(this, ingredientDataService);
         }
     }
 }

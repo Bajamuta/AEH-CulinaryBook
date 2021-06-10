@@ -15,6 +15,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Text="Recipes page" />
@@ -22,20 +23,22 @@
                 <TextBox Width="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" />
                 <Button Margin="20 0 0 0" Content="Search" Command="{Binding SearchRecipeCommand}" />
             </WrapPanel>
-            <ListBox Grid.Row="2" Width="600" Margin="0 20 0 0" HorizontalAlignment="Center"
-                     BorderBrush="Transparent"
-                     ItemsSource="{Binding ItemsList, UpdateSourceTrigger=PropertyChanged}">
+            <Button Grid.Row="2" Content="Get All" Command="{Binding GetAllRecipesCommand}"/>
+            <ListBox Grid.Row="3" Margin="0 20 0 0" HorizontalAlignment="Center"
+                     BorderBrush="Transparent" ItemsSource="{Binding ItemsList, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="100" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Grid.Column="1" Margin="10 0 0 0"
+                                       Text="{Binding RecipeCount, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
