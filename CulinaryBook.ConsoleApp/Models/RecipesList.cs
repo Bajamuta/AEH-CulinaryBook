@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CulinaryBook.ConsoleApp.Models
 {
     [Table("RECIPES_LIST")]
-    public class RecipesList
+    public class RecipesList : DbObject
     {
-        [Key]
         [ForeignKey("Recipe")]
         public int Id_Recipe { get; set; }
         public Recipe Recipe { get; set; }

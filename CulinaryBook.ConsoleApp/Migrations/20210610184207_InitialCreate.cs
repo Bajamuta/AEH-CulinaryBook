@@ -2,39 +2,27 @@
 
 namespace CulinaryBook.ConsoleApp.Migrations
 {
-    public partial class migrate02062021 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "TYPE",
-                table: "AUTHOR",
-                newName: "Type");
-
-            migrationBuilder.RenameColumn(
-                name: "PASSWORD",
-                table: "AUTHOR",
-                newName: "Password");
-
-            migrationBuilder.RenameColumn(
-                name: "NAME",
-                table: "AUTHOR",
-                newName: "Name");
-
-            migrationBuilder.RenameColumn(
-                name: "LOGIN",
-                table: "AUTHOR",
-                newName: "Login");
-
-            migrationBuilder.RenameColumn(
-                name: "EMAIL",
-                table: "AUTHOR",
-                newName: "Email");
-
-            migrationBuilder.RenameColumn(
-                name: "DESCRIPTION",
-                table: "AUTHOR",
-                newName: "Description");
+            migrationBuilder.CreateTable(
+                name: "AUTHOR",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AUTHOR", x => x.ID);
+                });
 
             migrationBuilder.CreateTable(
                 name: "BOOK",
@@ -55,8 +43,8 @@ namespace CulinaryBook.ConsoleApp.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,33 +57,12 @@ namespace CulinaryBook.ConsoleApp.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Junit = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Junit = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_INGREDIENT", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RECIPE",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Id_Author = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RECIPE", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_RECIPE_AUTHOR_Id_Author",
-                        column: x => x.Id_Author,
-                        principalTable: "AUTHOR",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,17 +79,39 @@ namespace CulinaryBook.ConsoleApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "INGREDIENTS_LIST",
+                name: "RECIPE",
                 columns: table => new
                 {
-                    Id_Ingredient = table.Column<int>(type: "int", nullable: false),
-                    Id_Recipe = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Id_Author = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_INGREDIENTS_LIST", x => new { x.Id_Recipe, x.Id_Ingredient });
+                    table.PrimaryKey("PK_RECIPE", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_RECIPE_AUTHOR_Id_Author",
+                        column: x => x.Id_Author,
+                        principalTable: "AUTHOR",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "INGREDIENTS_LIST",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id_Ingredient = table.Column<int>(type: "int", nullable: false),
+                    Id_Recipe = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_INGREDIENTS_LIST", x => x.ID);
                     table.ForeignKey(
                         name: "FK_INGREDIENTS_LIST_INGREDIENT_Id_Ingredient",
                         column: x => x.Id_Ingredient,
@@ -141,14 +130,15 @@ namespace CulinaryBook.ConsoleApp.Migrations
                 name: "RECIPES_LIST",
                 columns: table => new
                 {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Id_Recipe = table.Column<int>(type: "int", nullable: false),
                     Id_Category = table.Column<int>(type: "int", nullable: false),
-                    Id_Book = table.Column<int>(type: "int", nullable: false),
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id_Book = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RECIPES_LIST", x => new { x.Id_Recipe, x.Id_Category, x.Id_Book });
+                    table.PrimaryKey("PK_RECIPES_LIST", x => x.ID);
                     table.ForeignKey(
                         name: "FK_RECIPES_LIST_BOOK_Id_Book",
                         column: x => x.Id_Book,
@@ -173,14 +163,15 @@ namespace CulinaryBook.ConsoleApp.Migrations
                 name: "STEPS_LIST",
                 columns: table => new
                 {
-                    Id_Step = table.Column<int>(type: "int", nullable: false),
-                    Id_Recipe = table.Column<int>(type: "int", nullable: false),
-                    Step_Number = table.Column<int>(type: "int", nullable: false),
                     ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id_Step = table.Column<int>(type: "int", nullable: false),
+                    Step_Number = table.Column<int>(type: "int", nullable: false),
+                    Id_Recipe = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_STEPS_LIST", x => new { x.Id_Recipe, x.Id_Step });
+                    table.PrimaryKey("PK_STEPS_LIST", x => x.ID);
                     table.ForeignKey(
                         name: "FK_STEPS_LIST_RECIPE_Id_Recipe",
                         column: x => x.Id_Recipe,
@@ -201,10 +192,15 @@ namespace CulinaryBook.ConsoleApp.Migrations
                 column: "Id_Ingredient");
 
             migrationBuilder.CreateIndex(
+                name: "IX_INGREDIENTS_LIST_Id_Recipe",
+                table: "INGREDIENTS_LIST",
+                column: "Id_Recipe",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RECIPE_Id_Author",
                 table: "RECIPE",
-                column: "Id_Author",
-                unique: true);
+                column: "Id_Author");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RECIPES_LIST_Id_Book",
@@ -215,6 +211,17 @@ namespace CulinaryBook.ConsoleApp.Migrations
                 name: "IX_RECIPES_LIST_Id_Category",
                 table: "RECIPES_LIST",
                 column: "Id_Category");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RECIPES_LIST_Id_Recipe",
+                table: "RECIPES_LIST",
+                column: "Id_Recipe");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_STEPS_LIST_Id_Recipe",
+                table: "STEPS_LIST",
+                column: "Id_Recipe",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_STEPS_LIST_Id_Step",
@@ -248,35 +255,8 @@ namespace CulinaryBook.ConsoleApp.Migrations
             migrationBuilder.DropTable(
                 name: "STEP");
 
-            migrationBuilder.RenameColumn(
-                name: "Type",
-                table: "AUTHOR",
-                newName: "TYPE");
-
-            migrationBuilder.RenameColumn(
-                name: "Password",
-                table: "AUTHOR",
-                newName: "PASSWORD");
-
-            migrationBuilder.RenameColumn(
-                name: "Name",
-                table: "AUTHOR",
-                newName: "NAME");
-
-            migrationBuilder.RenameColumn(
-                name: "Login",
-                table: "AUTHOR",
-                newName: "LOGIN");
-
-            migrationBuilder.RenameColumn(
-                name: "Email",
-                table: "AUTHOR",
-                newName: "EMAIL");
-
-            migrationBuilder.RenameColumn(
-                name: "Description",
-                table: "AUTHOR",
-                newName: "DESCRIPTION");
+            migrationBuilder.DropTable(
+                name: "AUTHOR");
         }
     }
 }

@@ -13,12 +13,7 @@ namespace CulinaryBook.ConsoleApp.Models
     public class Author : DbObjectWithName
     {
        // We do not need the id parameter because we use DbObject
-        public Author()
-        {
-            Recipes = new List<Recipe>();
-        }
-        
-        [Required]
+       [Required]
         public Type Type { get; set; }
 
         [Required]
@@ -34,7 +29,5 @@ namespace CulinaryBook.ConsoleApp.Models
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
             ErrorMessage = "Invalid e-mail format")]
         public string Email { get; set; }
-
-        public IList<Recipe> Recipes { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using CulinaryBook.ConsoleApp.Services.BookServices;
 using CulinaryBook.ConsoleApp.Services.CategoryServices;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
+using CulinaryBook.ConsoleApp.Services.IngredientsListServices;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.ConsoleApp.Services.RecipeServices;
 using CulinaryBook.ConsoleApp.Services.StepServices;
@@ -16,6 +17,7 @@ using CulinaryBook.WPF.ViewModels;
 using CulinaryBook.WPF.ViewModels.Factories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Type = CulinaryBook.ConsoleApp.Models.Type;
 
 namespace CulinaryBook.WPF
 {
@@ -28,10 +30,8 @@ namespace CulinaryBook.WPF
         {
             // TODO Api: photos from internet
             IServiceProvider serviceProvider = CreateServiceProvider();
-            //ILoginService authentication = serviceProvider.GetRequiredService<ILoginService>();
-            /*bool login = authentication.Register("Krzysztof Porządny",
-                "krzysztof@gmail.com", "porzadny", "P@$$w0rd", "P@$$w0rd", "user").Result;*/
-
+            
+            CreateAdditional(serviceProvider);
             Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
 
@@ -47,6 +47,7 @@ namespace CulinaryBook.WPF
             services.AddSingleton<IBookDataService, BookDataService>();
             services.AddSingleton<ICategoryDataService, CategoryDataService>();
             services.AddSingleton<IRecipeDataService, RecipeDataService>();
+            services.AddSingleton<IIngredientsListDataService, IngredientsListDataService>();
             services.AddSingleton<IStepService, StepService>();
             services.AddSingleton<ILoginService, LoginService>();
             services.AddSingleton<IPasswordHasher<Author>, PasswordHasher<Author>>();
@@ -75,6 +76,53 @@ namespace CulinaryBook.WPF
             services.AddScoped<MainWindow>( s => new MainWindow(s.GetRequiredService<MainViewModel>()));
 
             return services.BuildServiceProvider();
+        }
+        
+        private async void CreateAdditional(IServiceProvider serviceProvider)
+        {
+            ILoginService authentication = serviceProvider.GetRequiredService<ILoginService>();
+            /*authentication.Register("Krzysztof Porządny",
+                "krzysztof@gmail.com", "porzadny", "P@$$w0rd", "P@$$w0rd", "Main admin",Type.Admin);*/
+            IIngredientDataService ingredientDataService = serviceProvider.GetRequiredService<IIngredientDataService>();
+            /*await ingredientDataService.Create(
+                new Ingredient()
+                {
+                    Name = "potatoes",
+                    Junit = "g"
+                });
+            await ingredientDataService.Create(
+                new Ingredient()
+                {
+                    Name = "rice",
+                    Junit = "g"
+                });
+            await ingredientDataService.Create(
+                new Ingredient()
+                {
+                    Name = "onion",
+                    Junit = "oz"
+                });*/
+            Ingredient ingredient1 = await ingredientDataService.Get(1);
+            Ingredient ingredient2 = await ingredientDataService.Get(2);
+            Ingredient ingredient3 = await ingredientDataService.Get(3);
+            IRecipeDataService recipeDataService = serviceProvider.GetRequiredService<IRecipeDataService>();
+            /*recipeDataService.Create(new Recipe()
+            {
+                Name = "Boiled potatoes",
+                Id_Author = 1,
+                Photo = "http://google.com"
+            });*/
+            Recipe recipe = await recipeDataService.Get(1);
+            IIngredientsListDataService listDataService =
+                serviceProvider.GetRequiredService<IIngredientsListDataService>();
+            /*IngredientsList ingredientsList = await listDataService.Create(
+                new IngredientsList()
+                {
+                    Id_Ingredient = ingredient1.ID,
+                    Id_Recipe = recipe.ID,
+                    Quantity = 300
+                });*/
+            
         }
     }
 }

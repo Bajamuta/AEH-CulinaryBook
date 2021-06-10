@@ -35,7 +35,7 @@ namespace CulinaryBook.ConsoleApp.Services.LoginServices
         }
 
         public async Task<RegistrationResult> Register(string name, string email, string login, 
-            string password, string confirmPassword, string description = "", Type type = Type.User)
+            string password, string confirmPassword, string description, Type type = Type.User)
         {
             // TODO UnitTesting authentication -> #13
             RegistrationResult registrationResult;
