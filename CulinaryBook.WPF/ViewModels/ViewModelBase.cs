@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CulinaryBook.ConsoleApp;
+using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.WPF.Models;
 
 namespace CulinaryBook.WPF.ViewModels

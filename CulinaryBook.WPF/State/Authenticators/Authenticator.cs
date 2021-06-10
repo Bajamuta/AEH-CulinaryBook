@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp;
+using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.WPF.Models;
 using CulinaryBook.WPF.State.Accounts;
+using Type = CulinaryBook.ConsoleApp.Models.Type;
 
 namespace CulinaryBook.WPF.State.Authenticators
 {
@@ -30,9 +32,9 @@ namespace CulinaryBook.WPF.State.Authenticators
 
         public bool IsLoggedIn => CurrentUser != null;
         
-        public async Task<RegistrationResult> Register(string name, string email, string login, string password, string confirmPassword)
+        public async Task<RegistrationResult> Register(string name, string email, string login, string password, string confirmPassword, string description, Type type)
         {
-            return await _loginService.Register(name, email, login, password, confirmPassword, "user");
+            return await _loginService.Register(name, email, login, password, confirmPassword, description, type);
         }
 
         public async Task<bool> Login(string userLogin, string userPassword)

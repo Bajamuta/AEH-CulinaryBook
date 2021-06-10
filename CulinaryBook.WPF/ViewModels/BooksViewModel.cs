@@ -25,6 +25,7 @@ namespace CulinaryBook.WPF.ViewModels
         }
         public ICommand SearchBookCommand { get; }
         public ICommand AddBookCommand { get; }
+        public ICommand GetAllBooksCommand { get; }
 
         public BooksViewModel(IBookDataService bookDataService, IAuthenticator authenticator)
         {
@@ -34,8 +35,7 @@ namespace CulinaryBook.WPF.ViewModels
             }
             SearchBookCommand = new SearchBookCommand(this, bookDataService);
             AddBookCommand = new AddBookCommand(this, bookDataService);
-            // TODO get all books
-            ItemsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
+            GetAllBooksCommand = new GetAllBooksCommand(this, bookDataService);
         }
     }
 }

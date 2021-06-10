@@ -1,4 +1,5 @@
 ﻿using CulinaryBook.ConsoleApp.Services.AuthorServices;
+using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.WPF.State.Authenticators;
 
 namespace CulinaryBook.WPF.ViewModels.Factories

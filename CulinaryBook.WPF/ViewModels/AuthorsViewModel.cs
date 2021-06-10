@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.AuthorServices;
+using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.WPF.Commands;
 using CulinaryBook.WPF.Commands.Authors;
 using CulinaryBook.WPF.Models;
@@ -12,12 +13,11 @@ namespace CulinaryBook.WPF.ViewModels
     public class AuthorsViewModel : ViewModelBase
     {
         private string _authorName;
-        private string _authorType;
+        private Type _authorType;
         private string _authorLogin;
         private string _authorPassword;
         private string _authorEmail;
         private string _authorDescription;
-        private string _loggedTypeUser;
 
         public string AuthorName
         {
@@ -50,7 +50,7 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
-        public string AuthorType
+        public Type AuthorType
         {
             get => _authorType;
             set
@@ -80,10 +80,11 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
-        public string LoggedTypeUser => LoggedAuthor.Type;
+        public Type LoggedTypeUser => LoggedAuthor.Type;
 
         public ICommand SearchAuthorCommand { get; }
         public ICommand AddAuthorCommand { get; }
+        public ICommand GetAllAuthorsCommand { get; }
 
         public AuthorsViewModel(IAuthorDataService authorDataService, IAuthenticator authenticator)
         {
@@ -92,9 +93,8 @@ namespace CulinaryBook.WPF.ViewModels
                 LoggedAuthor = authenticator.CurrentUser; 
             }
             SearchAuthorCommand = new SearchAuthorCommand(this, authorDataService);
-            AddAuthorCommand = new AddAuthorCommand(this, authorDataService);
-            // TODO get all Authors
-            ItemsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
+            AddAuthorCommand = new AddAuthorCommand(this, authorDataService, authenticator);
+            GetAllAuthorsCommand = new GetAllAuthorsCommand(this, authorDataService);
         }
     }
 }

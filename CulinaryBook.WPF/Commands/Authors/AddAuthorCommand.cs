@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Windows.Input;
-using CulinaryBook.ConsoleApp;
+using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.AuthorServices;
+using CulinaryBook.ConsoleApp.Services.LoginServices;
+using CulinaryBook.WPF.State.Authenticators;
 using CulinaryBook.WPF.ViewModels;
+using Type = CulinaryBook.ConsoleApp.Models.Type;
 
 namespace CulinaryBook.WPF.Commands.Authors
 {
@@ -10,9 +13,12 @@ namespace CulinaryBook.WPF.Commands.Authors
     {
         private readonly IAuthorDataService _service;
         private readonly AuthorsViewModel _authorsViewModel;
-        public AddAuthorCommand(AuthorsViewModel authorsViewModel, IAuthorDataService service)
+        private readonly IAuthenticator _authenticator;
+        public AddAuthorCommand(AuthorsViewModel authorsViewModel, IAuthorDataService service,
+        IAuthenticator authenticator)
         {
             _service = service;
+            _authenticator = authenticator;
             _authorsViewModel = authorsViewModel;
         }
         public bool CanExecute(object? parameter)
@@ -22,19 +28,16 @@ namespace CulinaryBook.WPF.Commands.Authors
 
         public async void Execute(object? parameter)
         {
-            // TODO hash password!
+            string name = _authorsViewModel.AuthorName;
+            string login = _authorsViewModel.AuthorLogin;
+            Type type = _authorsViewModel.AuthorType;
+            string password = _authorsViewModel.AuthorPassword;
+            // TODO confirm password
+            string email = _authorsViewModel.AuthorEmail;
+            string description = _authorsViewModel.AuthorDescription;
             try
             {
-                await _service.Create(
-                    new Author()
-                    {
-                        Name = _authorsViewModel.AuthorName,
-                        Type = _authorsViewModel.AuthorType,
-                        Login = _authorsViewModel.AuthorLogin,
-                        Password = _authorsViewModel.AuthorPassword,
-                        Email = _authorsViewModel.AuthorEmail,
-                        Description = _authorsViewModel.AuthorDescription
-                    });
+                await _authenticator.Register(name, email, login, password, password, description, type);
             }
             catch (Exception e)
             {

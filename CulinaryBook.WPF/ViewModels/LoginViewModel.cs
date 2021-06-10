@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using CulinaryBook.ConsoleApp;
+using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.WPF.Commands;
 using CulinaryBook.WPF.State.Authenticators;

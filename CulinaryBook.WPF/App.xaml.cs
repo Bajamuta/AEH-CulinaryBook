@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Windows;
 using CulinaryBook.ConsoleApp;
+using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using CulinaryBook.ConsoleApp.Services.BookServices;
 using CulinaryBook.ConsoleApp.Services.CategoryServices;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.ConsoleApp.Services.RecipeServices;
+using CulinaryBook.ConsoleApp.Services.StepServices;
 using CulinaryBook.WPF.State.Accounts;
 using CulinaryBook.WPF.State.Authenticators;
 using CulinaryBook.WPF.State.Navigators;
@@ -45,6 +47,7 @@ namespace CulinaryBook.WPF
             services.AddSingleton<IBookDataService, BookDataService>();
             services.AddSingleton<ICategoryDataService, CategoryDataService>();
             services.AddSingleton<IRecipeDataService, RecipeDataService>();
+            services.AddSingleton<IStepService, StepService>();
             services.AddSingleton<ILoginService, LoginService>();
             services.AddSingleton<IPasswordHasher<Author>, PasswordHasher<Author>>();
 

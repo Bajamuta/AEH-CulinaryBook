@@ -11,8 +11,8 @@ namespace CulinaryBook.ConsoleApp.Models
         {
             RecipesLists = new List<RecipesList>();
         }
-        [Required]
-        public string Description { get; set; }
+
+        [Required] public string Description { get; set; } = "";
         
         public IList<RecipesList> RecipesLists { get; set; }
     }

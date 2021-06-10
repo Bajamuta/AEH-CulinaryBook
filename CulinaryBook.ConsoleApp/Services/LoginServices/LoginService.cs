@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp.Exceptions;
+using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using Microsoft.AspNetCore.Identity;
+using Type = CulinaryBook.ConsoleApp.Models.Type;
 
 namespace CulinaryBook.ConsoleApp.Services.LoginServices
 {
@@ -33,7 +35,7 @@ namespace CulinaryBook.ConsoleApp.Services.LoginServices
         }
 
         public async Task<RegistrationResult> Register(string name, string email, string login, 
-            string password, string confirmPassword, string type = "user")
+            string password, string confirmPassword, string description = "", Type type = Type.User)
         {
             // TODO UnitTesting authentication -> #13
             RegistrationResult registrationResult;
