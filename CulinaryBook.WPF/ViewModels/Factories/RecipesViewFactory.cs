@@ -8,15 +8,17 @@ namespace CulinaryBook.WPF.ViewModels.Factories
     {
         private readonly IRecipeDataService _service;
         private readonly IAuthenticator _authenticator;
+        private readonly IIngredientDataService _ingredientDataService;
 
-        public RecipesViewFactory(IRecipeDataService service, IAuthenticator authenticator)
+        public RecipesViewFactory(IRecipeDataService service, IAuthenticator authenticator, IIngredientDataService ingredientDataService)
         {
             _service = service;
             _authenticator = authenticator;
+            _ingredientDataService = ingredientDataService;
         }
         public RecipesViewModel CreateViewModel()
         {
-            return new RecipesViewModel(_service, _authenticator);
+            return new RecipesViewModel(_service, _authenticator, _ingredientDataService);
         }
     }
 }

@@ -18,6 +18,9 @@ namespace CulinaryBook.WPF.ViewModels
         private string _recipePhoto;
         private List<Recipe> _recipes;
         private Recipe _selectedRecipe;
+        private Ingredient _selectedIngredient;
+        private List<Ingredient> _allIngredients;
+        private List<Ingredient> _recipeIngredients;
         public string RecipeName
         {
             get => _recipeName;
@@ -58,11 +61,44 @@ namespace CulinaryBook.WPF.ViewModels
             }
         }
 
+        public Ingredient SelectedIngredient
+        {
+            get => _selectedIngredient;
+            set
+            {
+                _selectedIngredient = value;
+                OnPropertyChanged(nameof(SelectedIngredient));
+            }
+        }
+
+        public List<Ingredient> RecipeIngredients
+        {
+            get => _recipeIngredients;
+            set
+            {
+                _recipeIngredients = value;
+                OnPropertyChanged(nameof(RecipeIngredients));
+            }
+        }
+
+        public List<Ingredient> AllIngredients
+        {
+            get => _allIngredients;
+            set
+            {
+                _allIngredients = value;
+                OnPropertyChanged(nameof(AllIngredients));
+            }
+        }
+
         public ICommand SearchRecipeCommand { get; }
         public ICommand AddRecipeCommand { get; }
         public ICommand GetAllRecipesCommand { get; }
+        public ICommand GetListOfIngredients { get; }
+        public ICommand AddSelectedIngredientCommand { get; }
 
-        public RecipesViewModel(IRecipeDataService recipeDataService, IAuthenticator authenticator)
+        public RecipesViewModel(IRecipeDataService recipeDataService, IAuthenticator authenticator, 
+            IIngredientDataService ingredientDataService)
         {
             if (authenticator.CurrentUser != null)
             {
@@ -71,6 +107,17 @@ namespace CulinaryBook.WPF.ViewModels
             SearchRecipeCommand = new SearchRecipeCommand(this, recipeDataService);
             AddRecipeCommand = new AddRecipeCommand(this, recipeDataService);
             GetAllRecipesCommand = new GetAllRecipesCommand(this, recipeDataService);
+            GetListOfIngredients = new GetListOfIngredientsCommand(this, ingredientDataService);
+            GetListOfIngredients.Execute(null);
+            RecipeIngredients = new List<Ingredient>()
+            {
+                new Ingredient()
+                {
+                    Name = "no data",
+                    Junit = ""
+                }
+            };
+            AddSelectedIngredientCommand = new AddSelectedIngredientCommand(this);
         }
     }
 }

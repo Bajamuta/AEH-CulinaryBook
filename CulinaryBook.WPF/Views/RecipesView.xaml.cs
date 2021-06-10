@@ -10,9 +10,9 @@ namespace CulinaryBook.WPF.Views
             InitializeComponent();
         }
 
-        private void RecipeClicked(object sender, RoutedEventArgs e)
+        private void AddIngredientClick(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            LbRecipeIngredients.Items.Refresh();
         }
     }
 }
