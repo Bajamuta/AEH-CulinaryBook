@@ -18,6 +18,8 @@ namespace CulinaryBook.WPF.ViewModels
         private string _authorPassword;
         private string _authorEmail;
         private string _authorDescription;
+        private Author _selectedAuthor;
+        private List<Author> _authors;
 
         public string AuthorName
         {
@@ -81,6 +83,26 @@ namespace CulinaryBook.WPF.ViewModels
         }
 
         public Type LoggedTypeUser => LoggedAuthor.Type;
+
+        public Author SelectedAuthor
+        {
+            get => _selectedAuthor;
+            set
+            {
+                _selectedAuthor = value;
+                OnPropertyChanged(nameof(SelectedAuthor));
+            }
+        }
+
+        public List<Author> Authors
+        {
+            get => _authors;
+            set
+            {
+                _authors = value;
+                OnPropertyChanged(nameof(Authors));
+            }
+        }
 
         public ICommand SearchAuthorCommand { get; }
         public ICommand AddAuthorCommand { get; }

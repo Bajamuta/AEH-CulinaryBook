@@ -30,15 +30,11 @@ namespace CulinaryBook.WPF.Commands.Authors
                 IEnumerable items = await _service.GetAll();
                 if (items != null)
                 {
-                    _authorsViewModel.ItemsList = new List<ItemList>();
+                    _authorsViewModel.Authors = new List<Author>();
                     foreach (Author item in items)
                     {
-                        _authorsViewModel.ItemsList.Add(
-                            new ItemList()
-                            {
-                                Title = item.Name,
-                                RecipeCount = "(3)"
-                            });
+                        _authorsViewModel.Authors.Add(
+                            item);
                     }
                 }
                 

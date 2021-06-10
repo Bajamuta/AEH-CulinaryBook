@@ -25,7 +25,8 @@
             </WrapPanel>
             <Button Grid.Row="2" Content="Get All" Command="{Binding GetAllRecipesCommand}"/>
             <ListBox Grid.Row="3" Margin="0 20 0 0" HorizontalAlignment="Center"
-                     BorderBrush="Transparent" ItemsSource="{Binding ItemsList, UpdateSourceTrigger=PropertyChanged}">
+                     BorderBrush="Transparent" ItemsSource="{Binding Recipes, UpdateSourceTrigger=PropertyChanged}"
+                     SelectedItem="{Binding SelectedRecipe, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10">
@@ -36,9 +37,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="100" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBlock Grid.Column="1" Margin="10 0 0 0"
-                                       Text="{Binding RecipeCount, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Grid.Column="0" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -71,6 +70,34 @@
                 <TextBox Width="300" Margin="10 0 0 0" Text="{Binding RecipePhoto, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <Button Grid.Row="2" Content="Add Recipe" Command="{Binding AddRecipeCommand}" />
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Hidden" />
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsLogged, UpdateSourceTrigger=PropertyChanged}"
+                            Value="False">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="{Binding SelectedRecipe.Name, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="{Binding SelectedRecipe.Photo, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+            </StackPanel>
+            <!--
+            <Button Grid.Row="2" Content="Add Recipe" Command="{Binding AddRecipeCommand}" />
+        -->
         </Grid>
     </Grid>
 </UserControl>

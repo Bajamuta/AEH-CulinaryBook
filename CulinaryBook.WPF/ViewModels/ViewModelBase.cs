@@ -8,7 +8,6 @@ namespace CulinaryBook.WPF.ViewModels
     public class ViewModelBase : ObservableObject
     {
         private string _search;
-        private List<ItemList> _items;
         private Author _loggedAuthor;
         public string Search
         {
@@ -19,17 +18,7 @@ namespace CulinaryBook.WPF.ViewModels
                 OnPropertyChanged(nameof(Search));
             }
         }
-        
-        public List<ItemList> ItemsList
-        {
-            get => _items;
-            set
-            {
-                _items = value;
-                OnPropertyChanged(nameof(ItemsList));
-            }
-        }
-        
+
         public Author LoggedAuthor
         {
             get => _loggedAuthor;

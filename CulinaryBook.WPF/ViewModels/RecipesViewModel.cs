@@ -16,6 +16,8 @@ namespace CulinaryBook.WPF.ViewModels
     {
         private string _recipeName;
         private string _recipePhoto;
+        private List<Recipe> _recipes;
+        private Recipe _selectedRecipe;
         public string RecipeName
         {
             get => _recipeName;
@@ -33,6 +35,26 @@ namespace CulinaryBook.WPF.ViewModels
             {
                 _recipePhoto = value;
                 OnPropertyChanged(nameof(RecipePhoto));
+            }
+        }
+
+        public Recipe SelectedRecipe
+        {
+            get => _selectedRecipe;
+            set
+            {
+                _selectedRecipe = value;
+                OnPropertyChanged(nameof(SelectedRecipe));
+            }
+        }
+
+        public List<Recipe> Recipes
+        {
+            get => _recipes;
+            set
+            {
+                _recipes = value;
+                OnPropertyChanged(nameof(Recipes));
             }
         }
 

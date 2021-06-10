@@ -30,15 +30,10 @@ namespace CulinaryBook.WPF.Commands.Recipes
                 IEnumerable items = await _service.GetAll();
                 if (items != null)
                 {
-                    _recipesViewModel.ItemsList = new List<ItemList>();
+                    _recipesViewModel.Recipes = new List<Recipe>();
                     foreach (Recipe item in items)
                     {
-                        _recipesViewModel.ItemsList.Add(
-                            new ItemList()
-                            {
-                                Title = item.Name,
-                                RecipeCount = "(3)"
-                            });
+                        _recipesViewModel.Recipes.Add(item);
                     }
                 }
                 

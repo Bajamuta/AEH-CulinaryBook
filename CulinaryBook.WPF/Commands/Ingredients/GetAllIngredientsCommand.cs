@@ -30,15 +30,10 @@ namespace CulinaryBook.WPF.Commands.Ingredients
                 IEnumerable items = await _service.GetAll();
                 if (items != null)
                 {
-                    _ingredientsViewModel.ItemsList = new List<ItemList>();
+                    _ingredientsViewModel.Ingredients = new List<Ingredient>();
                     foreach (Ingredient item in items)
                     {
-                        _ingredientsViewModel.ItemsList.Add(
-                            new ItemList()
-                            {
-                                Title = item.Name,
-                                RecipeCount = "(3)"
-                            });
+                        _ingredientsViewModel.Ingredients.Add(item);
                     }
                 }
                 

@@ -13,6 +13,8 @@ namespace CulinaryBook.WPF.ViewModels
     {
         private string _categoryName;
         private string _categoryDescription;
+        private Category _selectedCategory;
+        private List<Category> _categories;
 
         public string CategoryName
         {
@@ -31,6 +33,26 @@ namespace CulinaryBook.WPF.ViewModels
             {
                 _categoryDescription = value;
                 OnPropertyChanged(nameof(CategoryDescription));
+            }
+        }
+
+        public Category SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                _selectedCategory = value;
+                OnPropertyChanged(nameof(SelectedCategory));
+            }
+        }
+
+        public List<Category> Categories
+        {
+            get => _categories;
+            set
+            {
+                _categories = value;
+                OnPropertyChanged(nameof(Categories));
             }
         }
         public ICommand SearchCategoryCommand { get; }

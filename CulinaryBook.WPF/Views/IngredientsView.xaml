@@ -27,7 +27,8 @@
                 </WrapPanel>
                 <Button Grid.Row="2" Content="Get All" Command="{Binding GetAllIngredientsCommand}"/>
                 <ListBox Grid.Row="3" Margin="0 20 0 0" HorizontalAlignment="Center"
-                         BorderBrush="Transparent" ItemsSource="{Binding ItemsList, UpdateSourceTrigger=PropertyChanged}">
+                         BorderBrush="Transparent" ItemsSource="{Binding Ingredients, UpdateSourceTrigger=PropertyChanged}"
+                         SelectedItem="{Binding SelectedIngredient}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="10">
@@ -38,9 +39,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="100" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
-                                <TextBlock Grid.Column="1" Margin="10 0 0 0"
-                                           Text="{Binding RecipeCount, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBlock Grid.Column="0" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -75,6 +74,33 @@
             </StackPanel>
             <Button Grid.Row="2" Content="Add Ingredient" Command="{Binding AddIngredientCommand}" />
         </Grid>
-        
+        <Grid Grid.Column="1">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Hidden" />
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsLogged, UpdateSourceTrigger=PropertyChanged}"
+                            Value="False">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="{Binding SelectedIngredient.Name, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="{Binding SelectedIngredient.Junit, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+            </StackPanel>
+            <!--
+            <Button Grid.Row="2" Content="Add Recipe" Command="{Binding AddRecipeCommand}" />
+        -->
+        </Grid>
     </Grid>
 </UserControl>

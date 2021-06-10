@@ -14,6 +14,8 @@ namespace CulinaryBook.WPF.ViewModels
     {
         private string _ingredientName;
         private string _ingredientJunit;
+        private Ingredient _selectedIngredient;
+        private List<Ingredient> _ingredients;
         public string IngredientName
         {
             get => _ingredientName;
@@ -31,6 +33,26 @@ namespace CulinaryBook.WPF.ViewModels
             {
                 _ingredientJunit = value;
                 OnPropertyChanged(nameof(IngredientJunit));
+            }
+        }
+
+        public Ingredient SelectedIngredient
+        {
+            get => _selectedIngredient;
+            set
+            {
+                _selectedIngredient = value;
+                OnPropertyChanged(nameof(SelectedIngredient));
+            }
+        }
+
+        public List<Ingredient> Ingredients
+        {
+            get => _ingredients;
+            set
+            {
+                _ingredients = value;
+                OnPropertyChanged(nameof(Ingredients));
             }
         }
         

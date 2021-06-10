@@ -30,20 +30,19 @@ namespace CulinaryBook.WPF.Commands.Recipes
 
         public async void Execute(object? parameter)
         {
-            List<ItemList> items = new List<ItemList>();
+            List<Recipe> items = new List<Recipe>();
             try
             {
                 // TODO search by Author
                 IEnumerable recipes = await _recipeDataService.GetAllByName(_recipesViewModel.Search);
-                
-                foreach (Recipe recipe in recipes)
+                if (recipes != null)
                 {
-                    items.Add(new ItemList
+                    _recipesViewModel.Recipes = new List<Recipe>();
+                    foreach (Recipe recipe in recipes)
                     {
-                        Title = recipe.Name
-                    });
+                        _recipesViewModel.Recipes.Add(recipe);
+                    }
                 }
-                _recipesViewModel.ItemsList = items;
             }
             catch (Exception e)
             {

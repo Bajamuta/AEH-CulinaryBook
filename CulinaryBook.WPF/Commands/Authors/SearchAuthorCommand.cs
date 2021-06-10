@@ -31,21 +31,18 @@ namespace CulinaryBook.WPF.Commands
 
         public async void Execute(object? parameter)
         {
-            List<ItemList> items = new List<ItemList>();
             try
             {
                 IEnumerable authors = await _authorDataService.GetAllByName(_authorsViewModel.Search);
-                // TODO if null
-                foreach (Author author in authors)
+                if (authors != null)
                 {
-                    items.Add(new ItemList
+                    _authorsViewModel.Authors = new List<Author>();
+                    foreach (Author author in authors)
                     {
-                        Title = author.Name,
-                        RecipeCount = "(" + 2 + ")"
-                    });
+                        _authorsViewModel.Authors.Add(author);
+                    }
                 }
-                _authorsViewModel.ItemsList = items;
-            }
+      }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);

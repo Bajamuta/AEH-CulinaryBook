@@ -34,15 +34,15 @@ namespace CulinaryBook.WPF.Commands
             try
             {
                 IEnumerable books = await _bookDataService.GetAllByName(_booksViewModel.Search);
-                foreach (Book book in books)
+                if (books != null)
                 {
-                    items.Add(new ItemList
+                    _booksViewModel.Books = new List<Book>();
+                    foreach (Book book in books)
                     {
-                        Title = book.Name,
-                        RecipeCount = "(" + 2 + ")"
-                    });
+                        _booksViewModel.Books.Add(book);
+                    }
                 }
-                _booksViewModel.ItemsList = items;
+                
             }
             catch (Exception e)
             {

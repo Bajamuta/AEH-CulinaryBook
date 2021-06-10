@@ -13,6 +13,8 @@ namespace CulinaryBook.WPF.ViewModels
     public class BooksViewModel : ViewModelBase
     {
         private string _bookName;
+        private Book _selectedBook;
+        private List<Book> _books;
 
         public string BookName
         {
@@ -23,6 +25,27 @@ namespace CulinaryBook.WPF.ViewModels
                 OnPropertyChanged(nameof(BookName));
             }
         }
+
+        public Book SelectedBook
+        {
+            get => _selectedBook;
+            set
+            {
+                _selectedBook = value;
+                OnPropertyChanged(nameof(SelectedBook));
+            }
+        }
+
+        public List<Book> Books
+        {
+            get => _books;
+            set
+            {
+                _books = value;
+                OnPropertyChanged(nameof(Books));
+            }
+        }
+        
         public ICommand SearchBookCommand { get; }
         public ICommand AddBookCommand { get; }
         public ICommand GetAllBooksCommand { get; }

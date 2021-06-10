@@ -8,7 +8,7 @@ using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.WPF.Models;
 using CulinaryBook.WPF.ViewModels;
 
-namespace CulinaryBook.WPF.Commands
+namespace CulinaryBook.WPF.Commands.Ingredients
 {
     public class SearchIngredientCommand : ICommand
     {
@@ -34,16 +34,16 @@ namespace CulinaryBook.WPF.Commands
             try
             {
                 IEnumerable ingredients = await _ingredientDataService.GetAllByName(_ingredientsViewModel.Search);
-                
-                foreach (Ingredient ingredient in ingredients)
+
+                if (ingredients != null)
                 {
-                    items.Add(new ItemList
+                    _ingredientsViewModel.Ingredients = new List<Ingredient>();
+                    foreach (Ingredient ingredient in ingredients)
                     {
-                        Title = ingredient.Name,
-                        RecipeCount = "(" + 2 + ")"
-                    });
+                        _ingredientsViewModel.Ingredients.Add(ingredient);
+                    }
                 }
-                _ingredientsViewModel.ItemsList = items;
+                
             }
             catch (Exception e)
             {
