@@ -1,7 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace CulinaryBook.ConsoleApp.Services.StepServices
 {
@@ -39,5 +42,16 @@ namespace CulinaryBook.ConsoleApp.Services.StepServices
         {
             return await _service.Delete(id);
         }
+
+        public async Task<IEnumerable> GetAllByText(string text)
+        {
+            using (CulinaryBookContext context = _contextFactory.CreateDbContext())
+            {
+                IEnumerable<Step> entityList = await context.Set<Step>().Where((e) => e.Description.Contains(text)).ToListAsync();
+                // TODO add error handling
+                return entityList;
+            }
+        }
+        
     }
 }

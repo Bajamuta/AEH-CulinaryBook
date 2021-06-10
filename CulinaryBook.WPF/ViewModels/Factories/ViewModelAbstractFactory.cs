@@ -11,6 +11,7 @@ namespace CulinaryBook.WPF.ViewModels.Factories
         private readonly IViewModelFactory<CategoriesViewModel> _categoriesViewModelFactory;
         private readonly IViewModelFactory<IngredientsViewModel> _ingredientsViewModelFactory;
         private readonly IViewModelFactory<RecipesViewModel> _recipesViewModelFactory;
+        private readonly IViewModelFactory<StepsViewModel> _stepsViewModelFactory;
         private readonly IViewModelFactory<LoginViewModel> _loginViewModelFactory;
         private readonly IViewModelFactory<LogoutViewModel> _logoutViewModelFactory;
 
@@ -20,7 +21,10 @@ namespace CulinaryBook.WPF.ViewModels.Factories
             IViewModelFactory<BooksViewModel> booksViewModelFactory, 
             IViewModelFactory<CategoriesViewModel> categoriesViewModelFactory, 
             IViewModelFactory<IngredientsViewModel> ingredientsViewModelFactory, 
-            IViewModelFactory<RecipesViewModel> recipesViewModelFactory, IViewModelFactory<LoginViewModel> loginViewModelFactory, IViewModelFactory<LogoutViewModel> logoutViewModelFactory)
+            IViewModelFactory<RecipesViewModel> recipesViewModelFactory, 
+            IViewModelFactory<StepsViewModel> stepsViewModelFactory,
+            IViewModelFactory<LoginViewModel> loginViewModelFactory, 
+            IViewModelFactory<LogoutViewModel> logoutViewModelFactory)
         {
             _homeViewModelFactory = homeViewModelFactory;
             _authorsViewModelFactory = authorsViewModelFactory;
@@ -28,6 +32,7 @@ namespace CulinaryBook.WPF.ViewModels.Factories
             _categoriesViewModelFactory = categoriesViewModelFactory;
             _ingredientsViewModelFactory = ingredientsViewModelFactory;
             _recipesViewModelFactory = recipesViewModelFactory;
+            _stepsViewModelFactory = stepsViewModelFactory;
             _loginViewModelFactory = loginViewModelFactory;
             _logoutViewModelFactory = logoutViewModelFactory;
         }
@@ -48,6 +53,8 @@ namespace CulinaryBook.WPF.ViewModels.Factories
                     return _ingredientsViewModelFactory.CreateViewModel();
                 case ViewType.Authors:
                     return _authorsViewModelFactory.CreateViewModel();
+                case ViewType.Steps:
+                    return _stepsViewModelFactory.CreateViewModel();
                 case ViewType.Login:
                     return _loginViewModelFactory.CreateViewModel();
                 case ViewType.Logout:
