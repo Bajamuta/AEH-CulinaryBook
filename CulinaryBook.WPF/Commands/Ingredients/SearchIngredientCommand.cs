@@ -30,7 +30,7 @@ namespace CulinaryBook.WPF.Commands.Ingredients
 
         public async void Execute(object? parameter)
         {
-            List<ItemList> items = new List<ItemList>();
+            List<Ingredient> items = new List<Ingredient>();
             try
             {
                 IEnumerable ingredients = await _ingredientDataService.GetAllByName(_ingredientsViewModel.Search);

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\App.xaml
-122010656424
+13-1449962554
 
-73-848027287
+77-1820508297
 220-1140994952
-Controls\NavigationBar.xaml;MainWindow.xaml;Styles\Common.xaml;Views\AuthorsView.xaml;Views\BooksView.xaml;Views\CategoriesView.xaml;Views\HomeView.xaml;Views\IngredientsView.xaml;Views\LoginView.xaml;Views\LogoutView.xaml;Views\RecipesView.xaml;Views\StepsView.xaml;
+Controls\NavigationBar.xaml;MainWindow.xaml;Styles\Common.xaml;Views\AuthorsView.xaml;Views\BooksView.xaml;Views\CategoriesView.xaml;Views\HomeView.xaml;Views\IngredientsView.xaml;Views\LoginView.xaml;Views\LogoutView.xaml;Views\RecipesView.xaml;Views\ShowtimeView.xaml;Views\StepsView.xaml;
 
 False
 

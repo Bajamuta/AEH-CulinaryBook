@@ -33,7 +33,7 @@ namespace CulinaryBook.WPF
             var serviceProvider = CreateServiceProvider();
 
             //CreateAdditional(serviceProvider);
-            CreateFullRecipe(serviceProvider);
+            //CreateFullRecipe(serviceProvider);
             
             Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
@@ -65,13 +65,19 @@ namespace CulinaryBook.WPF
             services.AddSingleton<IViewModelFactory<IngredientsViewModel>, IngredientsViewFactory>();
             services.AddSingleton<IViewModelFactory<RecipesViewModel>, RecipesViewFactory>();
             services.AddSingleton<IViewModelFactory<StepsViewModel>, StepsViewFactory>();
+            services.AddSingleton<IViewModelFactory<LogoutViewModel>, LogoutViewFactory>();
+            services.AddSingleton<IViewModelFactory<ShowtimeViewModel>, ShowtimeViewFactory>();
+            
             services.AddSingleton<IViewModelFactory<LoginViewModel>>(
                 services => new LoginViewFactory(services.GetRequiredService<IAuthenticator>(),
                     new Renavigator<HomeViewModel>(
                         services.GetRequiredService<INavigator>(),
                         services.GetRequiredService<IViewModelFactory<HomeViewModel>>()
                     )));
-            services.AddSingleton<IViewModelFactory<LogoutViewModel>, LogoutViewFactory>();
+            /*services.AddSingleton<IViewModelFactory<MainViewModel>>(
+                services => new MainViewFactory(services.GetRequiredService<INavigator>(),
+                    services.GetRequiredService<IAuthenticator>(), 
+                    services.GetRequiredService<IViewModelAbstractFactory>()));*/
 
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();

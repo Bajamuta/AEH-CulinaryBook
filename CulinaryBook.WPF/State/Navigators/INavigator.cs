@@ -12,6 +12,7 @@ namespace CulinaryBook.WPF.State.Navigators
         Ingredients,
         Authors,
         Steps,
+        Showtime,
         Login,
         Logout
     }

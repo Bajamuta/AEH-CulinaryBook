@@ -39,7 +39,9 @@
                          CommandParameter="{x:Static nav:ViewType.Ingredients}" />
             <RadioButton Grid.Column="5" Content="AUTHORS" Command="{Binding UpdateCurrentViewModelCommand}"
                          CommandParameter="{x:Static nav:ViewType.Authors}" />
-            <RadioButton Grid.Column="6" Content="STEPS" Command="{Binding UpdateCurrentViewModelCommand}"
+            <RadioButton Grid.Column="6" Content="SHOWTIME" Command="{Binding UpdateCurrentViewModelCommand}"
+                         CommandParameter="{x:Static nav:ViewType.Showtime}" />
+            <RadioButton Grid.Column="8" Content="STEPS" Command="{Binding UpdateCurrentViewModelCommand}"
                          CommandParameter="{x:Static nav:ViewType.Steps}" >
                 <RadioButton.Style>
                     <Style TargetType="RadioButton">
@@ -54,7 +56,7 @@
                     </Style>
                 </RadioButton.Style>
             </RadioButton>
-            <RadioButton Grid.Column="7" Content="LOGIN" Command="{Binding UpdateCurrentViewModelCommand}"
+            <RadioButton Grid.Column="8" Content="LOGIN" Command="{Binding UpdateCurrentViewModelCommand}"
                          CommandParameter="{x:Static nav:ViewType.Login}" >
                 <RadioButton.Style>
                     <Style TargetType="RadioButton">

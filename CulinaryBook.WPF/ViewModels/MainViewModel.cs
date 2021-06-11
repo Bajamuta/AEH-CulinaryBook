@@ -8,7 +8,6 @@ namespace CulinaryBook.WPF.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly IViewModelAbstractFactory _viewModelAbstractFactory;
         public INavigator Navigator { get; }
         public IAuthenticator Authenticator { get; }
         
@@ -21,8 +20,7 @@ namespace CulinaryBook.WPF.ViewModels
         {
             Navigator = navigator;
             Authenticator = authenticator;
-            _viewModelAbstractFactory = viewModelAbstractFactory;
-            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelAbstractFactory);
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, viewModelAbstractFactory);
             LogoutCommand = new LogoutCommand(Authenticator, Navigator);
             UpdateCurrentViewModelCommand.Execute(ViewType.Home);
         }

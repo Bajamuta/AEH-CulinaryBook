@@ -14,6 +14,7 @@ namespace CulinaryBook.WPF.ViewModels.Factories
         private readonly IViewModelFactory<StepsViewModel> _stepsViewModelFactory;
         private readonly IViewModelFactory<LoginViewModel> _loginViewModelFactory;
         private readonly IViewModelFactory<LogoutViewModel> _logoutViewModelFactory;
+        private readonly IViewModelFactory<ShowtimeViewModel> _showtimeViewModelFactory;
 
         public ViewModelAbstractFactory(
             IViewModelFactory<HomeViewModel> homeViewModelFactory, 
@@ -24,7 +25,8 @@ namespace CulinaryBook.WPF.ViewModels.Factories
             IViewModelFactory<RecipesViewModel> recipesViewModelFactory, 
             IViewModelFactory<StepsViewModel> stepsViewModelFactory,
             IViewModelFactory<LoginViewModel> loginViewModelFactory, 
-            IViewModelFactory<LogoutViewModel> logoutViewModelFactory)
+            IViewModelFactory<LogoutViewModel> logoutViewModelFactory, 
+            IViewModelFactory<ShowtimeViewModel> showtimeViewModelFactory)
         {
             _homeViewModelFactory = homeViewModelFactory;
             _authorsViewModelFactory = authorsViewModelFactory;
@@ -35,6 +37,7 @@ namespace CulinaryBook.WPF.ViewModels.Factories
             _stepsViewModelFactory = stepsViewModelFactory;
             _loginViewModelFactory = loginViewModelFactory;
             _logoutViewModelFactory = logoutViewModelFactory;
+            _showtimeViewModelFactory = showtimeViewModelFactory;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -55,6 +58,8 @@ namespace CulinaryBook.WPF.ViewModels.Factories
                     return _authorsViewModelFactory.CreateViewModel();
                 case ViewType.Steps:
                     return _stepsViewModelFactory.CreateViewModel();
+                case ViewType.Showtime:
+                    return _showtimeViewModelFactory.CreateViewModel();
                 case ViewType.Login:
                     return _loginViewModelFactory.CreateViewModel();
                 case ViewType.Logout:

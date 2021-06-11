@@ -7,7 +7,7 @@ namespace CulinaryBook.ConsoleApp.Services.StepsListServices
 {
     public interface IStepsListDataService : IDataService<StepsList>
     {
-        public Task<StepsList> GetByRecipe(Recipe recipe);
+        public Task<IEnumerable> GetByRecipe(Recipe recipe);
         public Task<IEnumerable> GetByStep(Step step);
     }
 }

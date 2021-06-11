@@ -6,7 +6,5 @@
              xmlns:local="clr-namespace:CulinaryBook.WPF.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Text="Home page"></TextBlock>
-    </Grid>
+    <Grid></Grid>
 </UserControl>

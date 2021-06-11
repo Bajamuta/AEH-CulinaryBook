@@ -90,3 +90,5 @@ D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\Culina
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\bin\Debug\net5.0-windows\Microsoft.Extensions.Identity.Stores.dll
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Views\StepsView.g.cs
 D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Views\StepsView.baml
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Views\ShowtimeView.g.cs
+D:\DOK\WSTI vizja materiały\VI\SQL SERVER\KUCHARSKA\CulinaryBookSolution\CulinaryBook.WPF\obj\Debug\net5.0-windows\Views\ShowtimeView.baml
