@@ -10,6 +10,7 @@ using CulinaryBook.ConsoleApp.Services.IngredientsListServices;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.ConsoleApp.Services.RecipeServices;
 using CulinaryBook.ConsoleApp.Services.StepServices;
+using CulinaryBook.ConsoleApp.Services.StepsListServices;
 using CulinaryBook.WPF.State.Accounts;
 using CulinaryBook.WPF.State.Authenticators;
 using CulinaryBook.WPF.State.Navigators;
@@ -48,6 +49,7 @@ namespace CulinaryBook.WPF
             services.AddSingleton<ICategoryDataService, CategoryDataService>();
             services.AddSingleton<IRecipeDataService, RecipeDataService>();
             services.AddSingleton<IIngredientsListDataService, IngredientsListDataService>();
+            services.AddSingleton<IStepsListDataService, StepsListDataService>();
             services.AddSingleton<IStepService, StepService>();
             services.AddSingleton<ILoginService, LoginService>();
             services.AddSingleton<IPasswordHasher<Author>, PasswordHasher<Author>>();
@@ -112,15 +114,76 @@ namespace CulinaryBook.WPF
                 Id_Author = 1,
                 Photo = "http://google.com"
             });*/
+            recipeDataService.Create(
+                new Recipe()
+                {
+                    Id_Author = 1,
+                    Name = "Simple vegetables"
+                });
             Recipe recipe = await recipeDataService.Get(1);
             IIngredientsListDataService listDataService =
                 serviceProvider.GetRequiredService<IIngredientsListDataService>();
-            /*IngredientsList ingredientsList = await listDataService.Create(
+            /*await listDataService.Create(
                 new IngredientsList()
                 {
                     Id_Ingredient = ingredient1.ID,
                     Id_Recipe = recipe.ID,
                     Quantity = 300
+                });*/
+            await listDataService.Create(
+                new IngredientsList()
+                {
+                    Id_Ingredient = ingredient2.ID,
+                    Id_Recipe = recipe.ID,
+                    Quantity = 150
+                });
+            await listDataService.Create(
+                new IngredientsList()
+                {
+                    Id_Ingredient = ingredient3.ID,
+                    Id_Recipe = recipe.ID,
+                    Quantity = 30
+                });
+            IStepService stepService = serviceProvider.GetRequiredService<IStepService>();
+            /*await stepService.Create(
+                new Step()
+                {
+                    Description = "chop vegetables"
+                });
+            await stepService.Create(
+                new Step()
+                {
+                    Description = "boil in water"
+                });
+            await stepService.Create(
+                new Step()
+                {
+                    Description = "add salt"
+                });*/
+            Step step1 = await stepService.Get(1);
+            Step step2 = await stepService.Get(2);
+            Step step3 = await stepService.Get(3);
+            IStepsListDataService stepsListDataService = serviceProvider.GetRequiredService<IStepsListDataService>();
+            /*await stepsListDataService.Create(
+                new StepsList()
+                {
+                    Id_Step = step1.ID,
+                    Id_Recipe = recipe.ID,
+                    Step_Number = 1
+                });
+            await stepsListDataService.Create(
+                new StepsList()
+                {
+                    Id_Step = step2.ID,
+                    Id_Recipe = recipe.ID,
+                    Step_Number = 2
+                });
+            await stepsListDataService.Create(
+                new StepsList()
+                {
+                    Id_Step = step3.ID,
+                    Id_Recipe = recipe.ID,
+                    Step_Number = 3
                 });*/
             
         }

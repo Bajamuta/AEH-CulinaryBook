@@ -29,14 +29,14 @@ namespace CulinaryBook.ConsoleApp.Services.IngredientsListServices
             return await _service.Get(id);
         }
 
-        public async Task<IngredientsList> GetByRecipe(Recipe recipe)
+        public async Task<IEnumerable> GetByRecipe(Recipe recipe)
         {
             using (CulinaryBookContext context = _contextFactory.CreateDbContext())
             {
-                IngredientsList ingredientsList = null;
+                IEnumerable<IngredientsList> ingredientsList = null;
                 try
                 {
-                    ingredientsList = await context.Set<IngredientsList>().FirstOrDefaultAsync((e) => e.Id_Recipe == recipe.ID);
+                    ingredientsList = await context.Set<IngredientsList>().Where((e) => e.Id_Recipe == recipe.ID).ToListAsync();
                 }
                 catch (Exception e)
                 {

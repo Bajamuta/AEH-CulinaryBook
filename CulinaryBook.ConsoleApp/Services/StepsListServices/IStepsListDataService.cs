@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.DataAccess;
 
-namespace CulinaryBook.ConsoleApp.Services.IngredientsListServices
+namespace CulinaryBook.ConsoleApp.Services.StepsListServices
 {
-    public interface IIngredientsListDataService : IDataService<IngredientsList>
+    public interface IStepsListDataService : IDataService<StepsList>
     {
         public Task<IEnumerable> GetByRecipe(Recipe recipe);
-        public Task<IEnumerable> GetByIngredient(Ingredient ingredient);
+        public Task<IEnumerable> GetByStep(Step step);
     }
 }

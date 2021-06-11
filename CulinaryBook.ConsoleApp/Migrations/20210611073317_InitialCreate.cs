@@ -194,8 +194,7 @@ namespace CulinaryBook.ConsoleApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_INGREDIENTS_LIST_Id_Recipe",
                 table: "INGREDIENTS_LIST",
-                column: "Id_Recipe",
-                unique: true);
+                column: "Id_Recipe");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RECIPE_Id_Author",
@@ -220,8 +219,7 @@ namespace CulinaryBook.ConsoleApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_STEPS_LIST_Id_Recipe",
                 table: "STEPS_LIST",
-                column: "Id_Recipe",
-                unique: true);
+                column: "Id_Recipe");
 
             migrationBuilder.CreateIndex(
                 name: "IX_STEPS_LIST_Id_Step",

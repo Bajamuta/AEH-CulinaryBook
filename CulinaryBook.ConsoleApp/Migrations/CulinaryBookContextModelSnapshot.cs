@@ -133,8 +133,7 @@ namespace CulinaryBook.ConsoleApp.Migrations
 
                     b.HasIndex("Id_Ingredient");
 
-                    b.HasIndex("Id_Recipe")
-                        .IsUnique();
+                    b.HasIndex("Id_Recipe");
 
                     b.ToTable("INGREDIENTS_LIST");
                 });
@@ -225,8 +224,7 @@ namespace CulinaryBook.ConsoleApp.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("Id_Recipe")
-                        .IsUnique();
+                    b.HasIndex("Id_Recipe");
 
                     b.HasIndex("Id_Step");
 
@@ -242,8 +240,8 @@ namespace CulinaryBook.ConsoleApp.Migrations
                         .IsRequired();
 
                     b.HasOne("CulinaryBook.ConsoleApp.Models.Recipe", "Recipe")
-                        .WithOne("IngredientsList")
-                        .HasForeignKey("CulinaryBook.ConsoleApp.Models.IngredientsList", "Id_Recipe")
+                        .WithMany()
+                        .HasForeignKey("Id_Recipe")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -293,8 +291,8 @@ namespace CulinaryBook.ConsoleApp.Migrations
             modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.StepsList", b =>
                 {
                     b.HasOne("CulinaryBook.ConsoleApp.Models.Recipe", "Recipe")
-                        .WithOne("StepsList")
-                        .HasForeignKey("CulinaryBook.ConsoleApp.Models.StepsList", "Id_Recipe")
+                        .WithMany()
+                        .HasForeignKey("Id_Recipe")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -307,13 +305,6 @@ namespace CulinaryBook.ConsoleApp.Migrations
                     b.Navigation("Recipe");
 
                     b.Navigation("Step");
-                });
-
-            modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.Recipe", b =>
-                {
-                    b.Navigation("IngredientsList");
-
-                    b.Navigation("StepsList");
                 });
 #pragma warning restore 612, 618
         }

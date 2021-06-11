@@ -13,8 +13,5 @@ namespace CulinaryBook.ConsoleApp.Models
         [Required]
         public int Id_Author { get; set; }
         public Author Author { get; set; }
-        
-        public IngredientsList IngredientsList { get; set; }
-        public StepsList StepsList { get; set; }
     }
 }
