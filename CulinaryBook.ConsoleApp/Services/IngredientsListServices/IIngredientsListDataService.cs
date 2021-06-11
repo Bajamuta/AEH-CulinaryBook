@@ -7,7 +7,7 @@ namespace CulinaryBook.ConsoleApp.Services.IngredientsListServices
 {
     public interface IIngredientsListDataService : IDataService<IngredientsList>
     {
-        public Task<IEnumerable> GetByRecipe(Recipe recipe);
+        public Task<IngredientsList> GetByRecipe(Recipe recipe);
         public Task<IEnumerable> GetByIngredient(Ingredient ingredient);
     }
 }

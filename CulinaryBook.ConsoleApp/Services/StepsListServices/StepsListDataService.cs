@@ -44,14 +44,14 @@ namespace CulinaryBook.ConsoleApp.Services.StepsListServices
             return await _service.Delete(id);
         }
 
-        public async Task<IEnumerable> GetByRecipe(Recipe recipe)
+        public async Task<StepsList> GetByRecipe(Recipe recipe)
         {
             using (CulinaryBookContext context = _contextFactory.CreateDbContext())
             {
-                IEnumerable<StepsList> stepsList = null;
+                StepsList stepsList = null;
                 try
                 {
-                    stepsList = await context.Set<StepsList>().Where((e) => e.Id_Recipe == recipe.ID).ToListAsync();
+                    stepsList = await context.Set<StepsList>().FirstOrDefaultAsync((e) => e.Id_Recipe == recipe.ID);
                 }
                 catch (Exception e)
                 {

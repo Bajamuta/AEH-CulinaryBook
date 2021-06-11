@@ -24,16 +24,17 @@ using Type = CulinaryBook.ConsoleApp.Models.Type;
 namespace CulinaryBook.WPF
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            // TODO Api: photos from internet
-            IServiceProvider serviceProvider = CreateServiceProvider();
+            var serviceProvider = CreateServiceProvider();
+
+            //CreateAdditional(serviceProvider);
+            CreateFullRecipe(serviceProvider);
             
-            CreateAdditional(serviceProvider);
             Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
 
@@ -65,30 +66,30 @@ namespace CulinaryBook.WPF
             services.AddSingleton<IViewModelFactory<RecipesViewModel>, RecipesViewFactory>();
             services.AddSingleton<IViewModelFactory<StepsViewModel>, StepsViewFactory>();
             services.AddSingleton<IViewModelFactory<LoginViewModel>>(
-                (services) => new LoginViewFactory(services.GetRequiredService<IAuthenticator>(),
+                services => new LoginViewFactory(services.GetRequiredService<IAuthenticator>(),
                     new Renavigator<HomeViewModel>(
                         services.GetRequiredService<INavigator>(),
                         services.GetRequiredService<IViewModelFactory<HomeViewModel>>()
-                        )));
+                    )));
             services.AddSingleton<IViewModelFactory<LogoutViewModel>, LogoutViewFactory>();
-            
+
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();
             services.AddSingleton<IAccountStore, AccountStore>();
             services.AddScoped<MainViewModel>();
 
-            services.AddScoped<MainWindow>( s => new MainWindow(s.GetRequiredService<MainViewModel>()));
+            services.AddScoped(s => new MainWindow(s.GetRequiredService<MainViewModel>()));
 
             return services.BuildServiceProvider();
         }
-        
+
         private async void CreateAdditional(IServiceProvider serviceProvider)
         {
-            ILoginService authentication = serviceProvider.GetRequiredService<ILoginService>();
-            /*authentication.Register("Krzysztof Porządny",
-                "krzysztof@gmail.com", "porzadny", "P@$$w0rd", "P@$$w0rd", "Main admin",Type.Admin);*/
-            IIngredientDataService ingredientDataService = serviceProvider.GetRequiredService<IIngredientDataService>();
-            /*await ingredientDataService.Create(
+            var authentication = serviceProvider.GetRequiredService<ILoginService>();
+            authentication.Register("Krzysztof Porządny",
+                "krzysztof@gmail.com", "porzadny", "P@$$w0rd", "P@$$w0rd", "Main admin",Type.Admin);
+            var ingredientDataService = serviceProvider.GetRequiredService<IIngredientDataService>();
+            await ingredientDataService.Create(
                 new Ingredient()
                 {
                     Name = "potatoes",
@@ -105,12 +106,12 @@ namespace CulinaryBook.WPF
                 {
                     Name = "onion",
                     Junit = "oz"
-                });*/
-            Ingredient ingredient1 = await ingredientDataService.Get(1);
-            Ingredient ingredient2 = await ingredientDataService.Get(2);
-            Ingredient ingredient3 = await ingredientDataService.Get(3);
-            IRecipeDataService recipeDataService = serviceProvider.GetRequiredService<IRecipeDataService>();
-            /*recipeDataService.Create(new Recipe()
+                });
+            var ingredient1 = await ingredientDataService.Get(1);
+            var ingredient2 = await ingredientDataService.Get(2);
+            var ingredient3 = await ingredientDataService.Get(3);
+            var recipeDataService = serviceProvider.GetRequiredService<IRecipeDataService>();
+            recipeDataService.Create(new Recipe()
             {
                 Name = "Boiled potatoes",
                 Id_Author = 1,
@@ -122,11 +123,11 @@ namespace CulinaryBook.WPF
                     Id_Author = 1,
                     Name = "Simple vegetables",
                     Photo = "http://instagram.com"
-                });*/
-            Recipe recipe = await recipeDataService.Get(1);
-            IIngredientsListDataService listDataService =
+                });
+            var recipe = await recipeDataService.Get(1);
+            var listDataService =
                 serviceProvider.GetRequiredService<IIngredientsListDataService>();
-            /*await listDataService.Create(
+            await listDataService.Create(
                 new IngredientsList()
                 {
                     Id_Ingredient = ingredient1.ID,
@@ -146,9 +147,9 @@ namespace CulinaryBook.WPF
                     Id_Ingredient = ingredient3.ID,
                     Id_Recipe = recipe.ID,
                     Quantity = 30
-                });*/
-            IStepService stepService = serviceProvider.GetRequiredService<IStepService>();
-            /*await stepService.Create(
+                });
+            var stepService = serviceProvider.GetRequiredService<IStepService>();
+            await stepService.Create(
                 new Step()
                 {
                     Description = "chop vegetables"
@@ -162,12 +163,12 @@ namespace CulinaryBook.WPF
                 new Step()
                 {
                     Description = "add salt"
-                });*/
-            Step step1 = await stepService.Get(1);
-            Step step2 = await stepService.Get(2);
-            Step step3 = await stepService.Get(3);
-            IStepsListDataService stepsListDataService = serviceProvider.GetRequiredService<IStepsListDataService>();
-            /*await stepsListDataService.Create(
+                });
+            var step1 = await stepService.Get(1);
+            var step2 = await stepService.Get(2);
+            var step3 = await stepService.Get(3);
+            var stepsListDataService = serviceProvider.GetRequiredService<IStepsListDataService>();
+            await stepsListDataService.Create(
                 new StepsList()
                 {
                     Id_Step = step1.ID,
@@ -187,16 +188,16 @@ namespace CulinaryBook.WPF
                     Id_Step = step3.ID,
                     Id_Recipe = recipe.ID,
                     Step_Number = 3
-                });*/
-            IBookDataService bookDataService = serviceProvider.GetRequiredService<IBookDataService>();
-            /*bookDataService.Create(
+                });
+            var bookDataService = serviceProvider.GetRequiredService<IBookDataService>();
+            bookDataService.Create(
                 new Book()
                 {
                     Name = "Polish Cuisine"
-                });*/
-            Book book1 = await bookDataService.Get(1);
-            ICategoryDataService categoryDataService = serviceProvider.GetRequiredService<ICategoryDataService>();
-            /*await categoryDataService.Create(
+                });
+            var book1 = await bookDataService.Get(1);
+            var categoryDataService = serviceProvider.GetRequiredService<ICategoryDataService>();
+            await categoryDataService.Create(
                 new Category()
                 {
                     Name = "Breakfast",
@@ -207,19 +208,100 @@ namespace CulinaryBook.WPF
                 {
                     Name = "Lunch",
                     Description = "Delicious meals for break at work"
-                });*/
-            Category category1 = await categoryDataService.Get(1);
-            Category category2 = await categoryDataService.Get(2);
-            IRecipesListDataService recipesListDataService =
+                });
+            var category1 = await categoryDataService.Get(1);
+            var category2 = await categoryDataService.Get(2);
+            var recipesListDataService =
                 serviceProvider.GetRequiredService<IRecipesListDataService>();
-            /*await recipesListDataService.Create(
+            await recipesListDataService.Create(
                 new RecipesList()
                 {
                     Id_Book = book1.ID,
                     Id_Category = category1.ID,
                     Id_Recipe = recipe.ID
-                });*/
-            
+                });
+        }
+
+        public async void CreateFullRecipe(IServiceProvider serviceProvider)
+        {
+            var recipeDataService = serviceProvider.GetRequiredService<IRecipeDataService>();
+            var categoryDataService = serviceProvider.GetRequiredService<ICategoryDataService>();
+            var bookDataService = serviceProvider.GetRequiredService<IBookDataService>();
+            var ingredientDataService = serviceProvider.GetRequiredService<IIngredientDataService>();
+            var authenticator = serviceProvider.GetRequiredService<IAuthenticator>();
+            var stepService = serviceProvider.GetRequiredService<IStepService>();
+            var stepsListDataService = serviceProvider.GetRequiredService<IStepsListDataService>();
+            var recipesListDataService =
+                serviceProvider.GetRequiredService<IRecipesListDataService>();
+            var ingredientsListDataService =
+                serviceProvider.GetRequiredService<IIngredientsListDataService>();
+            if (await authenticator.Login("porzadny", "P@$$w0rd"))
+            {
+                var author = authenticator.CurrentUser;
+                var recipe = await recipeDataService.Create(
+                    new Recipe
+                    {
+                        Name = "Sandwich",
+                        Photo = "http://facebook.com",
+                        Id_Author = author.ID
+                    });
+                var category = await categoryDataService.Get(1);
+                var ingredient1 = await ingredientDataService.Get(1);
+                var ingredient2 = await ingredientDataService.Get(2);
+                var ingredient3 = await ingredientDataService.Get(3);
+                await ingredientsListDataService.Create(
+                    new IngredientsList
+                    {
+                        Id_Recipe = recipe.ID,
+                        Id_Ingredient = ingredient1.ID,
+                        Quantity = 250
+                    });
+                await ingredientsListDataService.Create(
+                    new IngredientsList
+                    {
+                        Id_Recipe = recipe.ID,
+                        Id_Ingredient = ingredient2.ID,
+                        Quantity = 150
+                    });
+                await ingredientsListDataService.Create(
+                    new IngredientsList
+                    {
+                        Id_Recipe = recipe.ID,
+                        Id_Ingredient = ingredient3.ID,
+                        Quantity = 50
+                    });
+                var ingredientsList = await ingredientsListDataService.GetByRecipe(recipe);
+                var step1 = await stepService.Get(1);
+                var step2 = await stepService.Get(2);
+                var step3 = await stepService.Get(3);
+                await stepsListDataService.Create(
+                    new StepsList
+                    {
+                        Id_Recipe = recipe.ID,
+                        Id_Step = step1.ID
+                    });
+                await stepsListDataService.Create(
+                    new StepsList
+                    {
+                        Id_Recipe = recipe.ID,
+                        Id_Step = step2.ID
+                    });
+                await stepsListDataService.Create(
+                    new StepsList
+                    {
+                        Id_Recipe = recipe.ID,
+                        Id_Step = step3.ID
+                    });
+                var stepsList = await stepsListDataService.GetByRecipe(recipe);
+                var book = await bookDataService.Get(1);
+                await recipesListDataService.Create(
+                    new RecipesList
+                    {
+                        Id_Book = book.ID,
+                        Id_Category = category.ID,
+                        Id_Recipe = recipe.ID
+                    });
+            }
         }
     }
 }
