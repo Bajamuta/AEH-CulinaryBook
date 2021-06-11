@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace CulinaryBook.WPF.Views
 {
@@ -7,6 +8,12 @@ namespace CulinaryBook.WPF.Views
         public ShowtimeView()
         {
             InitializeComponent();
+        }
+
+        private void ShowRecipe(object sender, RoutedEventArgs e)
+        {
+            LbIngredients.Items.Refresh();
+            LbSteps.Items.Refresh();
         }
     }
 }

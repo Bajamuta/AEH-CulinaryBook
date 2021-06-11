@@ -1,4 +1,5 @@
-﻿using CulinaryBook.ConsoleApp.Services.BookServices;
+﻿using CulinaryBook.ConsoleApp.Services.AuthorServices;
+using CulinaryBook.ConsoleApp.Services.BookServices;
 using CulinaryBook.ConsoleApp.Services.CategoryServices;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.ConsoleApp.Services.IngredientsListServices;
@@ -12,6 +13,7 @@ namespace CulinaryBook.WPF.ViewModels.Factories
     public class ShowtimeViewFactory : IViewModelFactory<ShowtimeViewModel>
     {
         private readonly IRecipesListDataService _recipesListDataService;
+        private readonly IAuthorDataService _authorDataService;
         private readonly IIngredientsListDataService _ingredientsListDataService;
         private readonly IRecipeDataService _recipeDataService;
         private readonly IBookDataService _bookDataService;
@@ -21,6 +23,7 @@ namespace CulinaryBook.WPF.ViewModels.Factories
         private readonly IIngredientDataService _ingredientDataService;
 
         public ShowtimeViewFactory(
+            IAuthorDataService authorDataService,
             IRecipesListDataService recipesListDataService, 
             IIngredientsListDataService ingredientsListDataService, 
             IRecipeDataService recipeDataService, 
@@ -29,6 +32,7 @@ namespace CulinaryBook.WPF.ViewModels.Factories
             ICategoryDataService categoryDataService, IStepService stepService, 
             IIngredientDataService ingredientDataService)
         {
+            _authorDataService = authorDataService;
             _recipesListDataService = recipesListDataService;
             _ingredientsListDataService = ingredientsListDataService;
             _recipeDataService = recipeDataService;
@@ -41,7 +45,7 @@ namespace CulinaryBook.WPF.ViewModels.Factories
 
         public ShowtimeViewModel CreateViewModel()
         {
-            return new ShowtimeViewModel(_recipesListDataService, _recipeDataService, _ingredientsListDataService,
+            return new ShowtimeViewModel(_recipesListDataService,_authorDataService, _recipeDataService, _ingredientsListDataService,
                 _bookDataService, _stepsListDataService, _categoryDataService, _stepService, _ingredientDataService);
         }
     }

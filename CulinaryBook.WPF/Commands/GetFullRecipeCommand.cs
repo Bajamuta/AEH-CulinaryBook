@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Input;
 using CulinaryBook.ConsoleApp.Models;
+using CulinaryBook.ConsoleApp.Services.AuthorServices;
 using CulinaryBook.ConsoleApp.Services.BookServices;
 using CulinaryBook.ConsoleApp.Services.CategoryServices;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
@@ -18,6 +19,7 @@ namespace CulinaryBook.WPF.Commands
     public class GetFullRecipeCommand : ICommand
     {
         private readonly ShowtimeViewModel _showtimeViewModel;
+        private readonly IAuthorDataService _authorDataService;
         private readonly IRecipesListDataService _recipesListDataService;
         private readonly IIngredientsListDataService _ingredientsListDataService;
         private readonly IRecipeDataService _recipeDataService;
@@ -28,6 +30,7 @@ namespace CulinaryBook.WPF.Commands
         private readonly IIngredientDataService _ingredientDataService;
 
         public GetFullRecipeCommand(ShowtimeViewModel showtimeViewModel, 
+            IAuthorDataService authorDataService,
             IRecipesListDataService recipesListDataService, 
             IRecipeDataService recipeDataService, 
             IIngredientsListDataService ingredientsListDataService, 
@@ -37,6 +40,7 @@ namespace CulinaryBook.WPF.Commands
             IIngredientDataService ingredientDataService)
         {
             _showtimeViewModel = showtimeViewModel;
+            _authorDataService = authorDataService;
             _recipesListDataService = recipesListDataService;
             _recipeDataService = recipeDataService;
             _ingredientsListDataService = ingredientsListDataService;
@@ -57,6 +61,7 @@ namespace CulinaryBook.WPF.Commands
             RecipesList selectedRecipeList = await _recipesListDataService.Get(1);
             Recipe recipe = await _recipeDataService.Get(selectedRecipeList.Id_Recipe);
             Book book = await _bookDataService.Get(selectedRecipeList.Id_Book);
+            Author author = await _authorDataService.Get(recipe.Id_Author);
             Category category = await _categoryDataService.Get(selectedRecipeList.Id_Category);
             IEnumerable stepsList = await _stepsListDataService.GetByRecipe(recipe);
             IEnumerable ingredientsList = await _ingredientsListDataService.GetByRecipe(recipe);
@@ -64,6 +69,7 @@ namespace CulinaryBook.WPF.Commands
             try
             {
                 _showtimeViewModel.Recipe = recipe;
+                _showtimeViewModel.Author = author;
                 _showtimeViewModel.Book = book;
                 _showtimeViewModel.Category = category;
                 _showtimeViewModel.Steps = new List<Step>();
