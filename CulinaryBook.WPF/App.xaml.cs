@@ -32,8 +32,8 @@ namespace CulinaryBook.WPF
         {
             var serviceProvider = CreateServiceProvider();
 
-            //CreateAdditional(serviceProvider);
-            //CreateFullRecipe(serviceProvider);
+            CreateAdditional(serviceProvider);
+            CreateFullRecipe(serviceProvider);
             
             Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();

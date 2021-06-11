@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp.Exceptions;
 using CulinaryBook.ConsoleApp.Models;
@@ -37,10 +39,8 @@ namespace CulinaryBook.ConsoleApp.Services.LoginServices
         public async Task<RegistrationResult> Register(string name, string email, string login, 
             string password, string confirmPassword, string description, Type type = Type.User)
         {
-            // TODO UnitTesting authentication -> #13
             RegistrationResult registrationResult;
-
-            // TODO check if user already exists: name, email, login
+            Regex regex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
             if (password == confirmPassword)
             {
                 if (await _authorService.GetByLogin(login) != null)
@@ -50,6 +50,10 @@ namespace CulinaryBook.ConsoleApp.Services.LoginServices
                 else if (await _authorService.GetExactByName(name) != null)
                 {
                     registrationResult = RegistrationResult.NameAlreadyExists;
+                }
+                else if(!regex.IsMatch(email))
+                {
+                    registrationResult = RegistrationResult.EmailNotValid;
                 }
                 else
                 {

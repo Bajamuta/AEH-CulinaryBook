@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CulinaryBook.ConsoleApp.Migrations
 {
     [DbContext(typeof(CulinaryBookContext))]
-    [Migration("20210611073317_InitialCreate")]
+    [Migration("20210611130247_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

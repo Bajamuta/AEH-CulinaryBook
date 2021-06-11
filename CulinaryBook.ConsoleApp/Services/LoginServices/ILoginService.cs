@@ -7,7 +7,7 @@ namespace CulinaryBook.ConsoleApp.Services.LoginServices
     {
         Success,
         PasswordDoNotMatch,
-        EmailAlreadyExists,
+        EmailNotValid,
         LoginAlreadyExists,
         NameAlreadyExists
     }
