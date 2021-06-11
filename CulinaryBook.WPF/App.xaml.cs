@@ -9,6 +9,7 @@ using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.ConsoleApp.Services.IngredientsListServices;
 using CulinaryBook.ConsoleApp.Services.LoginServices;
 using CulinaryBook.ConsoleApp.Services.RecipeServices;
+using CulinaryBook.ConsoleApp.Services.RecipesListServices;
 using CulinaryBook.ConsoleApp.Services.StepServices;
 using CulinaryBook.ConsoleApp.Services.StepsListServices;
 using CulinaryBook.WPF.State.Accounts;
@@ -50,6 +51,7 @@ namespace CulinaryBook.WPF
             services.AddSingleton<IRecipeDataService, RecipeDataService>();
             services.AddSingleton<IIngredientsListDataService, IngredientsListDataService>();
             services.AddSingleton<IStepsListDataService, StepsListDataService>();
+            services.AddSingleton<IRecipesListDataService, RecipesListDataService>();
             services.AddSingleton<IStepService, StepService>();
             services.AddSingleton<ILoginService, LoginService>();
             services.AddSingleton<IPasswordHasher<Author>, PasswordHasher<Author>>();
@@ -113,13 +115,14 @@ namespace CulinaryBook.WPF
                 Name = "Boiled potatoes",
                 Id_Author = 1,
                 Photo = "http://google.com"
-            });*/
+            });
             recipeDataService.Create(
                 new Recipe()
                 {
                     Id_Author = 1,
-                    Name = "Simple vegetables"
-                });
+                    Name = "Simple vegetables",
+                    Photo = "http://instagram.com"
+                });*/
             Recipe recipe = await recipeDataService.Get(1);
             IIngredientsListDataService listDataService =
                 serviceProvider.GetRequiredService<IIngredientsListDataService>();
@@ -129,7 +132,7 @@ namespace CulinaryBook.WPF
                     Id_Ingredient = ingredient1.ID,
                     Id_Recipe = recipe.ID,
                     Quantity = 300
-                });*/
+                });
             await listDataService.Create(
                 new IngredientsList()
                 {
@@ -143,7 +146,7 @@ namespace CulinaryBook.WPF
                     Id_Ingredient = ingredient3.ID,
                     Id_Recipe = recipe.ID,
                     Quantity = 30
-                });
+                });*/
             IStepService stepService = serviceProvider.GetRequiredService<IStepService>();
             /*await stepService.Create(
                 new Step()
@@ -184,6 +187,37 @@ namespace CulinaryBook.WPF
                     Id_Step = step3.ID,
                     Id_Recipe = recipe.ID,
                     Step_Number = 3
+                });*/
+            IBookDataService bookDataService = serviceProvider.GetRequiredService<IBookDataService>();
+            /*bookDataService.Create(
+                new Book()
+                {
+                    Name = "Polish Cuisine"
+                });*/
+            Book book1 = await bookDataService.Get(1);
+            ICategoryDataService categoryDataService = serviceProvider.GetRequiredService<ICategoryDataService>();
+            /*await categoryDataService.Create(
+                new Category()
+                {
+                    Name = "Breakfast",
+                    Description = "Light dishes to wake you up"
+                });
+            await categoryDataService.Create(
+                new Category()
+                {
+                    Name = "Lunch",
+                    Description = "Delicious meals for break at work"
+                });*/
+            Category category1 = await categoryDataService.Get(1);
+            Category category2 = await categoryDataService.Get(2);
+            IRecipesListDataService recipesListDataService =
+                serviceProvider.GetRequiredService<IRecipesListDataService>();
+            /*await recipesListDataService.Create(
+                new RecipesList()
+                {
+                    Id_Book = book1.ID,
+                    Id_Category = category1.ID,
+                    Id_Recipe = recipe.ID
                 });*/
             
         }
