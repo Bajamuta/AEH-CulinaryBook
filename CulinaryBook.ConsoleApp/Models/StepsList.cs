@@ -12,7 +12,7 @@ namespace CulinaryBook.ConsoleApp.Models
 
         [Required] 
         public int Step_Number { get; set; }
-
+        
         [ForeignKey("Recipe")]
         public int Id_Recipe { get; set; }
         public Recipe Recipe { get; set; }

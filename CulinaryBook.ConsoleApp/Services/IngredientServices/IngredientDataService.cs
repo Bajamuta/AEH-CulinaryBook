@@ -16,9 +16,9 @@ namespace CulinaryBook.ConsoleApp.Services.IngredientServices
             _contextFactory = contextFactory;
         }
 
-        public async Task<IEnumerable> GetByName(string name)
+        public async Task<IEnumerable> GetAllByName(string name)
         {
-            return await _service.GetByName(name);
+            return await _service.GetAllByName(name);
         }
         
         public async Task<IEnumerable> GetAll()

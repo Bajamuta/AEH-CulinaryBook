@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CulinaryBook.ConsoleApp
 {
@@ -8,7 +9,7 @@ namespace CulinaryBook.ConsoleApp
         public CulinaryBookContext CreateDbContext(string[] args = null)
         {
             var options = new DbContextOptionsBuilder<CulinaryBookContext>();
-            options.UseSqlServer("Data Source=(local); Database=KUCHARSKA;User Id=jap; Password='Baz1nga!';");
+            options.UseSqlServer("Data Source=(local); Database=CulinaryBook;User Id=jap; Password='Baz1nga!';");
             return new CulinaryBookContext(options.Options);
         }
     }

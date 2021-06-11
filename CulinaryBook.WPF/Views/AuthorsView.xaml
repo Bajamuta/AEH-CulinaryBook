@@ -3,37 +3,125 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:CulinaryBook.WPF.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Authors page"></TextBlock>
-        <WrapPanel Grid.Row="1" VerticalAlignment="Center" Margin="0 20 0 0">
-            <TextBox Width="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" />
-            <Button Margin="20 0 0 0" Content="Search" Command="{Binding SearchAuthorCommand}"/>
-        </WrapPanel>
-        <ListBox Grid.Row="2" Width="600" Margin="0 20 0 0" HorizontalAlignment="Center" 
-                 BorderBrush="Transparent" ItemsSource="{Binding AuthorsList, UpdateSourceTrigger=PropertyChanged}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="100" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Grid.Column="1" Margin="10 0 0 0" Text="{Binding RecipeCount, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Authors page" />
+            <WrapPanel Grid.Row="1" VerticalAlignment="Center" Margin="0 20 0 0">
+                <TextBox Width="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Margin="20 0 0 0" Content="Search" Command="{Binding SearchAuthorCommand}" />
+            </WrapPanel>
+            <Button Grid.Row="2" Content="Get All" Command="{Binding GetAllAuthorsCommand}"/>
+            <ListBox Grid.Row="3" Margin="0 20 0 0" HorizontalAlignment="Center"
+                     BorderBrush="Transparent" ItemsSource="{Binding Authors, UpdateSourceTrigger=PropertyChanged}"
+                     SelectedItem="{Binding SelectedAuthor}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Hidden" />
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding LoggedTypeUser, UpdateSourceTrigger=PropertyChanged}"
+                            Value="0">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <Label Content="Name" Width="Auto" />
+                <TextBox Width="300" Margin="10 0 0 0" Text="{Binding AuthorName}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <Label Content="Type" Width="Auto" />
+                <TextBox Width="300" Margin="10 0 0 0" Text="{Binding AuthorType, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2">
+                <Label Content="Email" Width="Auto" />
+                <TextBox Width="300" Margin="10 0 0 0"
+                         Text="{Binding AuthorEmail}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3">
+                <Label Content="Login" Width="Auto" />
+                <TextBox Width="300" Margin="10 0 0 0"
+                         Text="{Binding AuthorLogin}" />
+            </StackPanel>
+            <StackPanel Grid.Row="4">
+                <Label Content="Password" Width="Auto" />
+                <TextBox Width="300" Margin="10 0 0 0"
+                         Text="{Binding AuthorPassword}" />
+            </StackPanel>
+            <StackPanel Grid.Row="5">
+                <Label Content="Description" Width="Auto" />
+                <TextBox Width="300" Margin="10 0 0 0"
+                         Text="{Binding AuthorDescription}" />
+            </StackPanel>
+            <Button Grid.Row="6" Content="Add Author" Command="{Binding AddAuthorCommand}" />
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Hidden" />
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsLogged, UpdateSourceTrigger=PropertyChanged}"
+                            Value="False">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="{Binding SelectedAuthor.Name, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="{Binding SelectedAuthor.Email, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="{Binding SelectedAuthor.Description, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+            </StackPanel>
+            <!--
+            <Button Grid.Row="2" Content="Add Recipe" Command="{Binding AddRecipeCommand}" />
+        -->
+        </Grid>
     </Grid>
 </UserControl>

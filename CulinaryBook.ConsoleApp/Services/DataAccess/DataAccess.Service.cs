@@ -48,11 +48,19 @@ namespace CulinaryBook.ConsoleApp.Services.DataAccess
 
         public async Task<T> Create(T entity)
         {
+            EntityEntry<T> createdResult;
             using (CulinaryBookContext context = _contextFactory.CreateDbContext())
             {
-                EntityEntry<T> createdResult = await context.Set<T>().AddAsync(entity);
-                // TODO add error handling e.x. required fields
-                await context.SaveChangesAsync();
+                try
+                {
+                    createdResult = await context.Set<T>().AddAsync(entity);
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
                 return createdResult.Entity;
             }
         }

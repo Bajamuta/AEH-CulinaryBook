@@ -7,6 +7,6 @@ namespace CulinaryBook.ConsoleApp.Models
     [Table("BOOK")]
     public class Book : DbObjectWithName
     {
-        public IList<RecipesList> RecipesLists { get; set; }
+        
     }
 }

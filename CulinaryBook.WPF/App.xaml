@@ -27,8 +27,14 @@
              <DataTemplate DataType="{x:Type viewmodels:AuthorsViewModel}">
                  <views:AuthorsView />
              </DataTemplate>
+             <DataTemplate DataType="{x:Type viewmodels:ShowtimeViewModel}">
+                 <views:ShowtimeView />
+             </DataTemplate>
+             <DataTemplate DataType="{x:Type viewmodels:StepsViewModel}">
+                 <views:StepsView />
+             </DataTemplate>
              <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                 <views:LoginView />
+                 <views:LoginView LoginCommand="{Binding LoginCommand}"/>
              </DataTemplate>
              <DataTemplate DataType="{x:Type viewmodels:LogoutViewModel}">
                  <views:LogoutView />

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CulinaryBook.ConsoleApp.Services.DataAccess
 {
-    public class DataAccessWithNameService<T> where T : DbObjectWithName
+    public class DataAccessWithNameService<T> : IDataService<T> where T : DbObjectWithName
     {
         private readonly CulinaryBookContextFactory _contextFactory;
         private readonly DataAccessService<T> _service;
@@ -18,14 +17,24 @@ namespace CulinaryBook.ConsoleApp.Services.DataAccess
             _service = new DataAccessService<T>(contextFactory);
         }
         
-        public async Task<IEnumerable> GetByName(string name)
+        public async Task<IEnumerable> GetAllByName(string name)
         {
             using (CulinaryBookContext context = _contextFactory.CreateDbContext())
             {
                 IEnumerable<T> entityList = await context.Set<T>().Where((e) => e.Name.Contains(name)).ToListAsync();
-                /*T entity = await context.Set<T>().FirstOrDefaultAsync((e) => e.Name.Contains(name));*/
                 // TODO add error handling
                 return entityList;
+            }
+        }
+
+        public async Task<T> GetExactByName(string name)
+        {
+            using (CulinaryBookContext context = _contextFactory.CreateDbContext())
+            {
+                {
+                    T entity = await context.Set<T>().FirstOrDefaultAsync(e => e.Name == name);
+                    return entity;
+                }
             }
         }
         

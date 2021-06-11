@@ -4,42 +4,61 @@ using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.BookServices;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.WPF.Commands;
+using CulinaryBook.WPF.Commands.Books;
 using CulinaryBook.WPF.Models;
+using CulinaryBook.WPF.State.Authenticators;
 
 namespace CulinaryBook.WPF.ViewModels
 {
     public class BooksViewModel : ViewModelBase
     {
-        private DbObjectWithName _book;
-        private List<ItemList> _booksList;
+        private string _bookName;
+        private Book _selectedBook;
+        private List<Book> _books;
 
-        public DbObjectWithName Book
+        public string BookName
         {
-            get => _book;
+            get => _bookName;
             set
             {
-                _book = value;
-                OnPropertyChanged(nameof(Book));
+                _bookName = value;
+                OnPropertyChanged(nameof(BookName));
             }
         }
 
-        public List<ItemList> BooksList
+        public Book SelectedBook
         {
-            get => _booksList;
+            get => _selectedBook;
             set
             {
-                _booksList = value;
-                OnPropertyChanged(nameof(BooksList));
+                _selectedBook = value;
+                OnPropertyChanged(nameof(SelectedBook));
             }
         }
 
-        public ICommand SearchBookCommand { get; set; }
-
-        public BooksViewModel(IBookDataService bookDataService)
+        public List<Book> Books
         {
+            get => _books;
+            set
+            {
+                _books = value;
+                OnPropertyChanged(nameof(Books));
+            }
+        }
+        
+        public ICommand SearchBookCommand { get; }
+        public ICommand AddBookCommand { get; }
+        public ICommand GetAllBooksCommand { get; }
+
+        public BooksViewModel(IBookDataService bookDataService, IAuthenticator authenticator)
+        {
+            if (authenticator.CurrentUser != null)
+            {
+                LoggedAuthor = authenticator.CurrentUser; 
+            }
             SearchBookCommand = new SearchBookCommand(this, bookDataService);
-            // TODO get all books
-            BooksList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
+            AddBookCommand = new AddBookCommand(this, bookDataService);
+            GetAllBooksCommand = new GetAllBooksCommand(this, bookDataService);
         }
     }
 }

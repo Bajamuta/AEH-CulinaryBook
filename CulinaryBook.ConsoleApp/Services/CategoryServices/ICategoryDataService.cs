@@ -1,16 +1,12 @@
 ﻿using System.Collections;
 using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp.Models;
+using CulinaryBook.ConsoleApp.Services.DataAccess;
 
 namespace CulinaryBook.ConsoleApp.Services.CategoryServices
 {
-    public interface ICategoryDataService
+    public interface ICategoryDataService : IDataService<Category>
     {
-        Task<IEnumerable> GetAll();
-        Task<Category> Get(int id);
-        Task<IEnumerable> GetByName(string name);
-        Task<Category> Create(Category entity);
-        Task<Category> Update(int id, Category entity);
-        Task<bool> Delete(int id);
+        Task<IEnumerable> GetAllByName(string name);
     }
 }

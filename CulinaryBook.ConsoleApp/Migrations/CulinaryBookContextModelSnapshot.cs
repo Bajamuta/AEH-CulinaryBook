@@ -18,7 +18,7 @@ namespace CulinaryBook.ConsoleApp.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CulinaryBook.ConsoleApp.Author", b =>
+            modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.Author", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -46,9 +46,8 @@ namespace CulinaryBook.ConsoleApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -116,21 +115,25 @@ namespace CulinaryBook.ConsoleApp.Migrations
 
             modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.IngredientsList", b =>
                 {
-                    b.Property<int>("Id_Recipe")
-                        .HasColumnType("int");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Id_Ingredient")
                         .HasColumnType("int");
 
-                    b.Property<int>("ID")
+                    b.Property<int>("Id_Recipe")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id_Recipe", "Id_Ingredient");
+                    b.HasKey("ID");
 
                     b.HasIndex("Id_Ingredient");
+
+                    b.HasIndex("Id_Recipe");
 
                     b.ToTable("INGREDIENTS_LIST");
                 });
@@ -147,38 +150,42 @@ namespace CulinaryBook.ConsoleApp.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("Id_Author")
-                        .IsUnique();
+                    b.HasIndex("Id_Author");
 
                     b.ToTable("RECIPE");
                 });
 
             modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.RecipesList", b =>
                 {
-                    b.Property<int>("Id_Recipe")
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Id_Book")
                         .HasColumnType("int");
 
                     b.Property<int>("Id_Category")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id_Book")
+                    b.Property<int>("Id_Recipe")
                         .HasColumnType("int");
 
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id_Recipe", "Id_Category", "Id_Book");
+                    b.HasKey("ID");
 
                     b.HasIndex("Id_Book");
 
                     b.HasIndex("Id_Category");
+
+                    b.HasIndex("Id_Recipe");
 
                     b.ToTable("RECIPES_LIST");
                 });
@@ -201,19 +208,23 @@ namespace CulinaryBook.ConsoleApp.Migrations
 
             modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.StepsList", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("Id_Recipe")
                         .HasColumnType("int");
 
                     b.Property<int>("Id_Step")
                         .HasColumnType("int");
 
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Step_Number")
                         .HasColumnType("int");
 
-                    b.HasKey("Id_Recipe", "Id_Step");
+                    b.HasKey("ID");
+
+                    b.HasIndex("Id_Recipe");
 
                     b.HasIndex("Id_Step");
 
@@ -223,13 +234,13 @@ namespace CulinaryBook.ConsoleApp.Migrations
             modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.IngredientsList", b =>
                 {
                     b.HasOne("CulinaryBook.ConsoleApp.Models.Ingredient", "Ingredient")
-                        .WithMany("IngredientsLists")
+                        .WithMany()
                         .HasForeignKey("Id_Ingredient")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CulinaryBook.ConsoleApp.Models.Recipe", "Recipe")
-                        .WithMany("IngredientsLists")
+                        .WithMany()
                         .HasForeignKey("Id_Recipe")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -241,9 +252,9 @@ namespace CulinaryBook.ConsoleApp.Migrations
 
             modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.Recipe", b =>
                 {
-                    b.HasOne("CulinaryBook.ConsoleApp.Author", "Author")
-                        .WithOne("Recipe")
-                        .HasForeignKey("CulinaryBook.ConsoleApp.Models.Recipe", "Id_Author")
+                    b.HasOne("CulinaryBook.ConsoleApp.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("Id_Author")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -253,19 +264,19 @@ namespace CulinaryBook.ConsoleApp.Migrations
             modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.RecipesList", b =>
                 {
                     b.HasOne("CulinaryBook.ConsoleApp.Models.Book", "Book")
-                        .WithMany("RecipesLists")
+                        .WithMany()
                         .HasForeignKey("Id_Book")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CulinaryBook.ConsoleApp.Models.Category", "Category")
-                        .WithMany("RecipesLists")
+                        .WithMany()
                         .HasForeignKey("Id_Category")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CulinaryBook.ConsoleApp.Models.Recipe", "Recipe")
-                        .WithMany("RecipesLists")
+                        .WithMany()
                         .HasForeignKey("Id_Recipe")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -280,13 +291,13 @@ namespace CulinaryBook.ConsoleApp.Migrations
             modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.StepsList", b =>
                 {
                     b.HasOne("CulinaryBook.ConsoleApp.Models.Recipe", "Recipe")
-                        .WithMany("StepsLists")
+                        .WithMany()
                         .HasForeignKey("Id_Recipe")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CulinaryBook.ConsoleApp.Models.Step", "Step")
-                        .WithMany("StepsLists")
+                        .WithMany()
                         .HasForeignKey("Id_Step")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -294,40 +305,6 @@ namespace CulinaryBook.ConsoleApp.Migrations
                     b.Navigation("Recipe");
 
                     b.Navigation("Step");
-                });
-
-            modelBuilder.Entity("CulinaryBook.ConsoleApp.Author", b =>
-                {
-                    b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.Book", b =>
-                {
-                    b.Navigation("RecipesLists");
-                });
-
-            modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.Category", b =>
-                {
-                    b.Navigation("RecipesLists");
-                });
-
-            modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.Ingredient", b =>
-                {
-                    b.Navigation("IngredientsLists");
-                });
-
-            modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.Recipe", b =>
-                {
-                    b.Navigation("IngredientsLists");
-
-                    b.Navigation("RecipesLists");
-
-                    b.Navigation("StepsLists");
-                });
-
-            modelBuilder.Entity("CulinaryBook.ConsoleApp.Models.Step", b =>
-                {
-                    b.Navigation("StepsLists");
                 });
 #pragma warning restore 612, 618
         }

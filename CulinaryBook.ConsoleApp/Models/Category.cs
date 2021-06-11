@@ -7,9 +7,6 @@ namespace CulinaryBook.ConsoleApp.Models
     [Table("CATEGORY")]
     public class Category : DbObjectWithName
     {
-        [Required]
-        public string Description { get; set; }
-        
-        public IList<RecipesList> RecipesLists { get; set; }
+        [Required] public string Description { get; set; } = "";
     }
 }

@@ -9,7 +9,5 @@ namespace CulinaryBook.ConsoleApp.Models
     {
         [Required]
         public string Description { get; set; }
-        
-        public IList<StepsList> StepsLists { get; set; }
     }
 }

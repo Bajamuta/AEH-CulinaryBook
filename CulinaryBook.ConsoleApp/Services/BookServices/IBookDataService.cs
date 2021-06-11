@@ -1,16 +1,12 @@
 ﻿using System.Collections;
 using System.Threading.Tasks;
 using CulinaryBook.ConsoleApp.Models;
+using CulinaryBook.ConsoleApp.Services.DataAccess;
 
 namespace CulinaryBook.ConsoleApp.Services.BookServices
 {
-    public interface IBookDataService
+    public interface IBookDataService : IDataService<Book>
     {
-        Task<IEnumerable> GetAll();
-        Task<Book> Get(int id);
-        Task<IEnumerable> GetByName(string name);
-        Task<Book> Create(Book entity);
-        Task<Book> Update(int id, Book entity);
-        Task<bool> Delete(int id);
+        Task<IEnumerable> GetAllByName(string name);
     }
 }

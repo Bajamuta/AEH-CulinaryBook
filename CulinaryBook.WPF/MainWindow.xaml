@@ -6,15 +6,24 @@
         xmlns:local="clr-namespace:CulinaryBook.WPF"
         xmlns:controls="clr-namespace:CulinaryBook.WPF.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}" />
-        <ContentControl Grid.Row="1" Content="{Binding Navigator.CurrentViewModel}" />
-        <TextBlock Grid.Row="2" Text="All rights reserved" Background="{StaticResource SecondaryBrush4}" />
+        <controls:NavigationBar Grid.Row="0" />
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ContentControl Grid.Row="0" Content="{Binding Navigator.CurrentViewModel}" />
+                <TextBlock Grid.Row="1" Text="All rights reserved" Background="{StaticResource SecondaryBrush4}" />
+            </Grid>
+        </ScrollViewer>
+        
     </Grid>
 </Window>

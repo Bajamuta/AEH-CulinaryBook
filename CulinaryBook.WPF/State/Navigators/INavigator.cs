@@ -11,6 +11,8 @@ namespace CulinaryBook.WPF.State.Navigators
         Recipes,
         Ingredients,
         Authors,
+        Steps,
+        Showtime,
         Login,
         Logout
     }
@@ -18,6 +20,5 @@ namespace CulinaryBook.WPF.State.Navigators
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-        ICommand UpdateCurrentViewModelCommand { get; }
     }
 }

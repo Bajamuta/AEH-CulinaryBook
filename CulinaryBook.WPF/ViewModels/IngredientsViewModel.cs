@@ -1,44 +1,74 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
+using CulinaryBook.ConsoleApp;
 using CulinaryBook.ConsoleApp.Models;
 using CulinaryBook.ConsoleApp.Services.IngredientServices;
 using CulinaryBook.WPF.Commands;
+using CulinaryBook.WPF.Commands.Ingredients;
 using CulinaryBook.WPF.Models;
+using CulinaryBook.WPF.State.Authenticators;
 
 namespace CulinaryBook.WPF.ViewModels
 {
     public class IngredientsViewModel : ViewModelBase
     {
-        private DbObjectWithName _ingredient;
-        private List<ItemList> _ingredientsList;
-
-        public DbObjectWithName Ingredient
+        private string _ingredientName;
+        private string _ingredientJunit;
+        private Ingredient _selectedIngredient;
+        private List<Ingredient> _ingredients;
+        public string IngredientName
         {
-            get => _ingredient;
+            get => _ingredientName;
             set
             {
-                _ingredient = value;
-                OnPropertyChanged(nameof(Ingredient));
+                _ingredientName = value;
+                OnPropertyChanged(nameof(IngredientName));
             }
         }
 
-        public List<ItemList> IngredientsList
+        public string IngredientJunit
         {
-            get => _ingredientsList;
+            get => _ingredientJunit;
             set
             {
-                _ingredientsList = value;
-                OnPropertyChanged(nameof(IngredientsList));
+                _ingredientJunit = value;
+                OnPropertyChanged(nameof(IngredientJunit));
             }
         }
 
-        public ICommand SearchIngredientCommand { get; set; }
-
-        public IngredientsViewModel(IIngredientDataService ingredientDataService)
+        public Ingredient SelectedIngredient
         {
+            get => _selectedIngredient;
+            set
+            {
+                _selectedIngredient = value;
+                OnPropertyChanged(nameof(SelectedIngredient));
+            }
+        }
+
+        public List<Ingredient> Ingredients
+        {
+            get => _ingredients;
+            set
+            {
+                _ingredients = value;
+                OnPropertyChanged(nameof(Ingredients));
+            }
+        }
+        
+        public ICommand SearchIngredientCommand { get; }
+        public ICommand AddIngredientCommand { get; }
+        public ICommand GetAllIngredientsCommand { get; }
+
+        public IngredientsViewModel(IIngredientDataService ingredientDataService, IAuthenticator authenticator)
+        {
+            if (authenticator.CurrentUser != null)
+            {
+                LoggedAuthor = authenticator.CurrentUser; 
+            }
             SearchIngredientCommand = new SearchIngredientCommand(this, ingredientDataService);
-            // TODO get all ingredients
-            IngredientsList = new List<ItemList> {new ItemList {Title = "none", RecipeCount = "(0)"}};
+            AddIngredientCommand = new AddIngredientCommand(this, ingredientDataService);
+            GetAllIngredientsCommand = new GetAllIngredientsCommand(this, ingredientDataService);
         }
     }
 }
